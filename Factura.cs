@@ -10,23 +10,6 @@ namespace PPLabo2_2D
 {
     public class Factura
     {
-        // metodo generar factura que tome como parametros - Cliente + List Productos 
-
-        // Productos -> List de Productos 
-
-
-        // Form ->
-        // Instanciar el CLiente
-        // Instanciar Cada Producto
-        // guardar cantidades
-        // llamar al metodo Heladera.ActualizarCantidad (Producto,cantidades) y si devuelve true 
-        // guardarlo en un List Producto(Producto)
-        // enviarlo al metodo Factura.GenerarFactura recibe (Cliente, Listado Producto <Producto>)
-        // Retorna una factura
-        // Boton Mostrar Factura -> debe mnostrar la factura generada en el Form y a su vez llamar
-        //                          -> Guardar la Factura generada en un listado CORE
-        // 
-
         private List<Producto>producto;
         private Cliente cliente;
         private float totalPorProducto;
@@ -129,7 +112,11 @@ namespace PPLabo2_2D
             get => this.fechaActual;
         }
 
-
+        /// <summary>
+        /// Recibe el atributo del subtotal de la compra y calcula el iva sobre este monto
+        /// </summary>
+        /// <param name="SubtotalFactura"></param>
+        /// <returns></returns>
         public static float CalcularIva(float SubtotalFactura)
         {
             float iva = 21f/100f;
@@ -137,6 +124,11 @@ namespace PPLabo2_2D
             return  SubtotalFactura * iva ;
         }
 
+        /// <summary>
+        /// Recibe el total de la factura con el iva sumado y suma la recarga por poago con tarjeta
+        /// </summary>
+        /// <param name="TotalFactura"></param>
+        /// <returns></returns>
         public static float RecargoTarjetaDeCredito(float TotalFactura)
         {
             float recargo = 1f/20f;
@@ -144,6 +136,12 @@ namespace PPLabo2_2D
             return TotalFactura * recargo;
         }
 
+        /// <summary>
+        /// Recibe el cliente que realizo la compra y el listado de productos y genera la factura de la compra
+        /// </summary>
+        /// <param name="clienteFacturar"></param>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public Factura GenerarFactura(Cliente clienteFacturar, List<Producto> producto)
         {           
             this.producto = new List<Producto>();
@@ -170,6 +168,10 @@ namespace PPLabo2_2D
             return this;
         }
 
+        /// <summary>
+        /// Devuelve una cadena de strings con los datos necesarios para imprimar la factura en un listado
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {                  
             return $"FC nº - {NumeroDeFactura} - Cliente: {Cliente.Nombre} {Cliente.Apellido} - Cuit: {Cliente.Cuit} - TOTAL ${TotalFactura}";

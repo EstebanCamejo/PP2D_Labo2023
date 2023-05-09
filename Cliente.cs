@@ -57,6 +57,18 @@ namespace PPLabo2_2D
             this.Factura.Add(factura);
         }                
         
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subtotalFactura"></param>
+        /// Es el precio de la suma de todos los productos comprados
+        /// <param name="pagarConTarjeta"></param>
+        /// Es la variable que valida la forma de pago del cliente
+        /// <param name="ivaDelProductoAgregado"></param>
+        /// Es la variable que acumula el iva de todos los productos comprados
+        /// <returns></returns>
+
         public bool ActualizarBilletera(float subtotalFactura, bool pagarConTarjeta, float ivaDelProductoAgregado)
         {
             bool retorno = false;
@@ -93,6 +105,12 @@ namespace PPLabo2_2D
             
             
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factura"></param>
+        /// Es la factura emitida que el cliente debe pagar
+        /// <returns></returns>
         public bool PagarFactura(Factura factura)
         {
             if (Billetera >= factura.TotalFactura)
@@ -108,6 +126,12 @@ namespace PPLabo2_2D
             return $" {Nombre} {Apellido} - Cuit: {Cuit}";
         }
 
+
+
+        /// <summary>
+        /// El metodo Obtener factura busca la ultima factura en el indice del listado de facturas del cliente
+        /// </summary>
+        /// <returns></returns>
         public Factura ObtenerUltimaFactura()
         {
             if (this.factura.Count == 0)
@@ -119,5 +143,6 @@ namespace PPLabo2_2D
                 return this.factura[this.factura.Count - 1]; // Devuelve el último elemento de la lista de facturas.
             }
         }
+
     }
 }

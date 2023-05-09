@@ -34,11 +34,20 @@
         public float CantidadSolicitada { get => cantidadSolicitada; }
         public float PrecioPorCantidad { get => precioPorCantidad; }
 
+        /// <summary>
+        /// El metodo retorna una cadena de string con los datos del producto para poder mostrarse en una lista
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{TipoDeProducto} - {Nombre} - ${PrecioPorKilo} - Stock: {CantidadDeKilos} Kg.";
         }
 
+        /// <summary>
+        /// El metodo setea la cantidad solicitada del producto
+        /// </summary>
+        /// <param name="cantidadSolicitada"></param>
+        /// <returns></returns>
         public bool SetearCantidadSolicitada(float cantidadSolicitada)
         {
             this.cantidadSolicitada = cantidadSolicitada;
@@ -46,6 +55,11 @@
             return true;
         }
 
+        /// <summary>
+        /// El metodo setea el precio por la cantidad solicitada para este producto
+        /// </summary>
+        /// <param name="precioPorCantidad"></param>
+        /// <returns></returns>
         public bool SetearPrecioPorCantidadSolicitada(float precioPorCantidad)
         {
             this.precioPorCantidad = precioPorCantidad;

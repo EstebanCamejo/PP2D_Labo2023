@@ -23,12 +23,15 @@ namespace PPLabo2_2D
         {
             get { return this.listaProducto; }
         }
-
+        /// <summary>
+        /// El metodo recibe un nuevo producto y luego de confirmar que no se encuentra en la lista se guarda en la misma
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public bool ActualizarProductoEnLalista(Producto producto)
         {
             if (producto is not null)
-            {
-              //foreach (Producto p in this.listaProducto)
+            {              
                 for (int i = 0;i < this.listaProducto.Count;i++) 
                 {
                     if (listaProducto[i].CodigoDeProducto==producto.CodigoDeProducto)     
@@ -43,6 +46,11 @@ namespace PPLabo2_2D
             return false;
         }
 
+        /// <summary>
+        /// El metodo recibe un nuevo producto y luego de confirmar que este no existe lo guarda en la lista
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public bool AgregarProductoALista(Producto producto)
         {
             if(producto is not null)
@@ -87,6 +95,11 @@ namespace PPLabo2_2D
             return false;
         }
 
+        /// <summary>
+        /// El metodo recibe un objeto producto con una nueva cantidad seteada por el vendedor y actualiza el stock
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public bool ActualizarCantidad (Producto producto)
         {
             foreach (Producto p in this.listaProducto)
@@ -104,17 +117,27 @@ namespace PPLabo2_2D
             return false;
         }
 
+        /// <summary>
+        /// El metodo recibe un producto y lo busca en la lista y confirma si la cantidad dispobible puede satisfacer
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public bool DisponibilidadProducto (Producto producto)
         {
             foreach (Producto p in this.listaProducto)
             {
-                if (p.CodigoDeProducto == producto.CodigoDeProducto && p.CantidadDeKilos >= producto.CantidadDeKilos)
+                if (p.CodigoDeProducto == producto.CodigoDeProducto && p.CantidadDeKilos >= producto.CantidadSolicitada)
                 {
                     return true;               
                 }
             }
             return false;
         }
+        /// <summary>
+        /// EL metodo recibe un listado actualizado de productos y actualiza su estado
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public bool ActualizarProductosDeLaHeladera(List<Producto> producto)
         {
             if (producto is not null)

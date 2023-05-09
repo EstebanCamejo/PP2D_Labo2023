@@ -19,9 +19,14 @@ namespace PPLabo2_2D
            
         }
 
-        //Puede vender productos seleccionando a un cliente de la lista de clientes.
-        //Forms tiene que tener un listado Cientes  al que poder acceder instanciar una nueva lista de productos
-        // y llamar al metodo "Vender Productos"
+      /// <summary>
+      /// El vendedor recibe un cliente y una lista de productos solicitada y realiza la transaccion venta
+      /// comprueba la disponibilidad solicitada de cada producto en la heladera
+      /// Genera una nueva factura y le cobra al cliente
+      /// </summary>
+      /// <param name="cliente"></param>
+      /// <param name="productos"></param>
+      /// <returns></returns>
         public bool VenderProductos(Cliente cliente, List<Producto> productos)
         {                                  
             foreach(Producto p in productos)
@@ -39,7 +44,9 @@ namespace PPLabo2_2D
 
             return true;   
         }
-
+        /// <summary>
+        /// Retorna el estado actual de la heladera
+        /// </summary>
         public Heladera Heladera
         {
             get => this.heladera;          

@@ -30,6 +30,9 @@ namespace PPLabo2_2D
             CoreDelSistema.CargarClaseFacturas();
         }
 
+        /// <summary>
+        /// Harcodeo de los clientes al sistema
+        /// </summary>
         private static void CargarClaseClientes()
         {
             CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",999999,301111111,"Lonesirum 2014", ETipoDePago.efectivo));
@@ -42,7 +45,11 @@ namespace PPLabo2_2D
             CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",999999,301111118,"Family 2012",ETipoDePago.efectivo));
             CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",999999,301111119,"Bosanova 1991",ETipoDePago.efectivo));                        
         }
-        
+
+        /// <summary>
+        /// Harcodeo de los productos al sistema
+        /// </summary>
+
         private static void CargarClaseProductos() 
         {
             CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2100,75, "Asado"));
@@ -70,7 +77,11 @@ namespace PPLabo2_2D
             CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 2675,54, "Salchicha Parrillera"));
             CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1075,82, "Chinchulin"));
         }
-               
+
+
+        /// <summary>
+        /// Harcodeo de las facturas al sistema
+        /// </summary>
 
         private static void CargarClaseFacturas()
         {
@@ -97,7 +108,11 @@ namespace PPLabo2_2D
           //  set { CoreDelSistema.productos = value; }
         }
 
-
+        /// <summary>
+        /// Recibe el objeto cliente y lo guarda en la lista del sistema
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public static bool GuardarNuevoCliente(Cliente cliente)
         {
             if (cliente is not null)
@@ -108,6 +123,11 @@ namespace PPLabo2_2D
             return false;
         }
 
+        /// <summary>
+        /// Recibe el objeto factura y lo guarda en la lista del sistema
+        /// </summary>
+        /// <param name="factura"></param>
+        /// <returns></returns>
         public static bool GuardarNuevaFactura (Factura factura)
         {
             if (factura is not null)
@@ -119,6 +139,11 @@ namespace PPLabo2_2D
             
         }
 
+        /// <summary>
+        /// Recibe el objeto producto y lo guarda en la lista del sistema
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
         public static bool GuardarNuevoProducto(Producto producto)
         {
             if (producto is not null)
