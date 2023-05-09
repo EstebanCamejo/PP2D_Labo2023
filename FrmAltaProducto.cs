@@ -46,7 +46,12 @@ namespace VisualParcial1
             get { return productoAlta; }
         }
 
-
+        /// <summary>
+        /// Cargo el combobox con la informacion que contiene mi enumerado productos
+        /// Actualizo mis etiquetas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmAltaProducto_Load(object sender, EventArgs e)
         {
             cbb_TipoDeProducto.Items.Add("vacuno");
@@ -64,6 +69,14 @@ namespace VisualParcial1
             }
         }
 
+
+        /// <summary>
+        /// Valido cada campo porviniente de los text box y combo box hago el parse en cada uno que lo necesite
+        /// En el caso que sea una modificacion rescato esa informacion para no duplicar prductos
+        /// Luego instancio el nuevo producto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_CrearProducto_Click(object sender, EventArgs e)
         {
            

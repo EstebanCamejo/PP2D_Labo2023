@@ -50,6 +50,12 @@ namespace VisualParcial1
 
         }
 
+        /// <summary>
+        /// Cargo el formulario con los datos necesarios, actualizo la heladera para disponer de los productos
+        /// y actualizo las etiquetas con los datos del cliente que me llega por instanciacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmCompraVenta_Load(object sender, EventArgs e)
         {
             dtgv_Productos.ReadOnly = true;
@@ -63,6 +69,9 @@ namespace VisualParcial1
 
         }
 
+        /// <summary>
+        /// Actualizo los productos en el list box obteniendo el listado de productos desde la heladera
+        /// </summary>
         private void ActualizarListBoxDeProductos()
         {
             cbb_SleccionProducto.DataSource = null;
@@ -70,6 +79,18 @@ namespace VisualParcial1
             cbb_SleccionProducto.DataSource = heladera.ListaProducto;
         }
 
+        /// <summary>
+        /// Obtengo el indice del proiducto en la lista, con este obtengo el producto seleccionado por el cliente
+        /// verifico si los campos ingresados son correctos los parseo a mi conveniencia y obtengo los detalles 
+        /// del producto seleccionado para la compra, verifico la disponibilidad en la heladera, chequeo que metodo de pago 
+        /// va a utilizar el cliente, compruebo que tenga saldo suficiente para agregar el producto a la lista, si es asi 
+        /// actualizo la heladera, el monto disponieble a gastar para el cliente. Actualizo el formulario y los datagrid 
+        /// con la informacion de la transaccion, actualizo la oinformacion para este producto en la compra y lo agrego a la lista.
+        /// En caso que alguno de los pasos sea invalido el usuario es informado.
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
             int indiceProductoEnLaLista = ObtenerIndiceDelProductoEnHeladera();
@@ -89,21 +110,16 @@ namespace VisualParcial1
 
                 float ivaDelProductoAgregado = DevolverIvaDelProducto(precioPorCantidad);
 
-
                 //Comprobamos disponibilidad sobre la cantidad del producto
 
                 if (heladera.DisponibilidadProducto(productoAgregado))
                 {
                     //****CHEQUEAR SI ES CON TC o EFVO***
 
-
                     if (cliente.TipoDePago == ETipoDePago.tarjeta)
                     {
                         pagaConTarjeta = true;
                     }
-
-
-
                     // Actualizar billetera
                     if (cliente.ActualizarBilletera(precioPorCantidad, pagaConTarjeta, ivaDelProductoAgregado))
                     {
