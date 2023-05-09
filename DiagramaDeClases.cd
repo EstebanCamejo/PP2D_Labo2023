@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PPLabo2_2D.Cliente">
+    <Position X="2.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAQAAAAIQAIAAEACDAAAAAIAAASCAECAgABAAAAEA=</HashCode>
+      <FileName>Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.CoreDelSistema" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAcABAAAAAQAAAAAAAAQAAAIAAIQBCAIEBQAA=</HashCode>
+      <FileName>CoreDelSistema.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.Factura" Collapsed="true">
+    <Position X="7.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAACEBAEAoEQBCCAAIAgBACEAAAAACABBAAgAQ=</HashCode>
+      <FileName>Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.Heladera" Collapsed="true">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEAAAAAMAAAAAAAAQAAAAAAAQIAAAAAAAAAAIAE=</HashCode>
+      <FileName>Heladera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.Producto" Collapsed="true">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAICgAwCAADcQAAAgAAAACAAAABEAAAAAAAAAAA=</HashCode>
+      <FileName>Producto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.Usuario" Collapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAEACAAAAAgAAAAAAAAAAAAIAAAACAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PPLabo2_2D.Vendedor">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQIAAAAAAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>Vendedor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PPLabo2_2D.EProdcuto" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAABAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>EProducto.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PPLabo2_2D.ETipoDePago" Collapsed="true">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>ETipoDePago.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,12 @@
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\bin\Debug\net6.0\PPLabo2_2D.deps.json
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\bin\Debug\net6.0\PPLabo2_2D.dll
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\bin\Debug\net6.0\PPLabo2_2D.pdb
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.dll
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\refint\PPLabo2_2D.dll
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\PPLabo2_2D.pdb
+C:\Users\Usuario\source\repos\Camejo.Esteban\PPLabo2_2D\obj\Debug\net6.0\ref\PPLabo2_2D.dll
