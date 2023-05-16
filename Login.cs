@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace VisualParcial1
 {
@@ -17,44 +18,65 @@ namespace VisualParcial1
         MenuCliente menuCliente;
         MenuVendedor menuVendedor;
         string tipoDeUsuario;
-        private Inicio FrmInicio;
 
-        public Login(string tipoDeUsuario, Inicio frmInicio)
+
+        public Login()
         {
             InitializeComponent();
             usuarioValido = "Usuario";
             passwordValido = "Contrasenia";
-            this.tipoDeUsuario = tipoDeUsuario;
-            FrmInicio = frmInicio;
         }
-
-        private void btn_Ingresar_Click(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
             txb_nombreUsuario.Text = "Usuario";
             txb_contrasenia.Text = "Contrasenia";
+        }
 
-            string usuarioIngresado = txb_nombreUsuario.Text;
-            string passwordIngresado = txb_contrasenia.Text;
+        private void btn_Cliente_Click(object sender, EventArgs e)
+        {
+            tipoDeUsuario = "cliente";
 
-            if (usuarioIngresado == usuarioValido && passwordIngresado == passwordValido)
+            if (menuCliente == null && tipoDeUsuario == "cliente")
             {
-                if (menuCliente == null && tipoDeUsuario == "cliente")
-                {
-                    menuCliente = new MenuCliente(this);
-                    menuCliente.Show();
-                    this.Hide();
-                }
-                else if (menuVendedor == null && tipoDeUsuario == "vendedor")
-                {
-                    menuVendedor = new MenuVendedor(this);
-                    menuVendedor.Show();
-                    this.Hide();
-                }
+                menuCliente = new MenuCliente();
+                menuCliente.Show();
+                this.Hide();
 
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosUP.wav"; ; // Ruta del archivo de sonido
+                player.Play();
             }
             else
             {
-                MessageBox.Show("Usuario o Contraseña incorrecta");
+                MessageBox.Show("Error. Seleccione una opcion valida");
+
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
+                player.Play();
+            }
+        }
+
+        private void btn_Vendedor_Click(object sender, EventArgs e)
+        {
+            tipoDeUsuario = "vendedor";
+
+            if (menuVendedor == null && tipoDeUsuario == "vendedor")
+            {
+                menuVendedor = new MenuVendedor();
+                menuVendedor.Show();
+                this.Hide();
+
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosUP.wav"; ; // Ruta del archivo de sonido
+                player.Play();
+            }
+            else
+            {
+                MessageBox.Show("Error. Seleccione una opcion valida");
+
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
+                player.Play();
             }
         }
 
@@ -66,18 +88,6 @@ namespace VisualParcial1
         private void txb_contrasenia_TextChanged(object sender, EventArgs e)
         {
             txb_contrasenia.Text = "Contrasenia";
-        }
-
-        public void MostrarLogin()
-        {
-            this.Show();
-        }
-
-        private void btn_VolverAtras_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            FrmInicio.Show();
-
         }
     }
 }

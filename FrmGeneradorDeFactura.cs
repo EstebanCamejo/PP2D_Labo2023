@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace VisualParcial1
 {
@@ -16,11 +17,19 @@ namespace VisualParcial1
         Cliente clienteAFacturar;
         List<Producto> productosAFacturar;
         Factura facturaGenerada;
+
+        MenuCliente menuCliente;
         FrmCompraVenta frmCompraVenta;
         public FrmGeneradorDeFactura()
         {
             InitializeComponent();
 
+        }
+        public FrmGeneradorDeFactura(Cliente cliente, List<Producto> productos, MenuCliente menuCliente) : this()
+        {
+            this.clienteAFacturar = cliente;
+            this.productosAFacturar = productos;
+            this.menuCliente = menuCliente;
         }
         public FrmGeneradorDeFactura(Cliente cliente, List<Producto> productos, FrmCompraVenta frmCompraVenta) : this()
         {
@@ -29,18 +38,20 @@ namespace VisualParcial1
             this.frmCompraVenta = frmCompraVenta;
         }
 
+
+
         private void FrmGeneradorDeFactura_Load(object sender, EventArgs e)
         {
             facturaGenerada = clienteAFacturar.ObtenerUltimaFactura();
 
             lbl_NumeroFactura.Text = "Nº00000-00 " + facturaGenerada.NumeroDeFactura.ToString();
-            lbl_Fecha.Text = "FECHA: " + facturaGenerada.FechaActual.ToString();
+            lbl_Fecha.Text = "FECHA: " + facturaGenerada.FechaActual.ToShortDateString();
             lbl_NombreFc.Text = "Señor/es: " + clienteAFacturar.Nombre + " " + clienteAFacturar.Apellido;
             lbl_Cuit.Text = "CUIT: " + clienteAFacturar.Cuit.ToString();
-            lbl_Subtotal.Text = "Sub. Total: " + facturaGenerada.SubtotalFactura.ToString();
-            lbl_IvaTotal.Text = "IVA INSC...% " + facturaGenerada.IvaFactura.ToString();
-            lbl_RecargoTc.Text = "Recargo TC %5: " + facturaGenerada.Recargo.ToString();
-            lbl_TotalFactura.Text = "TOTAL :" + facturaGenerada.TotalFactura.ToString();
+            lbl_Subtotal.Text = "" + facturaGenerada.SubtotalFactura.ToString("N2");
+            lbl_IvaTotal.Text = "" + facturaGenerada.IvaFactura.ToString("N2");
+            lbl_RecargoTc.Text = "" + facturaGenerada.Recargo.ToString("N2");
+            lbl_TotalFactura.Text = "" + facturaGenerada.TotalFactura.ToString("N2");
 
             dgv_ListaDeProductos.Columns.Add("ColumnaCantidades", "Cantidad");
             dgv_ListaDeProductos.Columns.Add("ColumnaNombre", "Nombre del Producto");
@@ -85,10 +96,28 @@ namespace VisualParcial1
 
         }
 
-        private void btn_VolverAtras_Click(object sender, EventArgs e)
+        private void btn_Atras_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmCompraVenta.Show();
+            if (menuCliente != null)
+            {
+                this.Hide();
+                menuCliente.Show();
+                SonidoVolverAtras();
+            }
+            else if (frmCompraVenta != null)
+            {
+                this.Hide();
+                frmCompraVenta.Show();
+                SonidoVolverAtras();
+            }
+            return;
+
+        }
+        private void SonidoVolverAtras()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
+            player.Play();
         }
     }
 }

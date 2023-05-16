@@ -57,9 +57,9 @@
             btnVendedor.TabIndex = 1;
             btnVendedor.Text = "Vendedor";
             btnVendedor.UseVisualStyleBackColor = true;
-            btnVendedor.Click += btnVendedor_Click;
-            btnVendedor.MouseLeave += btnVendedor_MouseLeave;
-            btnVendedor.MouseHover += btnVendedor_MouseHover;
+            //btnVendedor.Click += btnVendedor_Click;
+            //btnVendedor.MouseLeave += btnVendedor_MouseLeave;
+            //btnVendedor.MouseHover += btnVendedor_MouseHover;
             // 
             // btnCliente
             // 
@@ -71,9 +71,9 @@
             btnCliente.TabIndex = 2;
             btnCliente.Text = "Cliente";
             btnCliente.UseVisualStyleBackColor = true;
-            btnCliente.Click += btnCliente_Click;
-            btnCliente.MouseLeave += btnCliente_MouseLeave;
-            btnCliente.MouseHover += btnCliente_MouseHover;
+            //btnCliente.Click += btnCliente_Click;
+            //btnCliente.MouseLeave += btnCliente_MouseLeave;
+            //btnCliente.MouseHover += btnCliente_MouseHover;
             // 
             // label2
             // 

@@ -9,6 +9,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 
 namespace VisualParcial1
@@ -16,8 +17,7 @@ namespace VisualParcial1
     public partial class FrmAltaProducto : Form
     {
         Producto productoAlta;
-        EProdcuto tipoProductoEnum;
-        // string tipoDeProducto;
+        EProdcuto tipoProductoEnum;        
         string precioPorKilo;
         string cantidadDeKilos;
         string nombre;
@@ -31,7 +31,7 @@ namespace VisualParcial1
             this.esModificar = false;
         }
         public FrmAltaProducto(AbmHeladera frmAbmHladera) : this()
-        {                       
+        {
             this.frmAbmHladera = frmAbmHladera;
         }
         public FrmAltaProducto(Producto productoEditar, AbmHeladera frmAbmHladera) : this()
@@ -79,7 +79,7 @@ namespace VisualParcial1
         /// <param name="e"></param>
         private void btn_CrearProducto_Click(object sender, EventArgs e)
         {
-           
+
             nombre = txb_Nombre.Text;
             precioPorKilo = txb_Precio.Text;
             cantidadDeKilos = txb_Cantidad.Text;
@@ -87,6 +87,7 @@ namespace VisualParcial1
             if (string.IsNullOrWhiteSpace(cbb_TipoDeProducto.Text))
             {
                 MessageBox.Show("El tipo de Producto Selecionado es Invalido");
+                SonidoError();
             }
             else
             {
@@ -96,15 +97,18 @@ namespace VisualParcial1
             if (string.IsNullOrEmpty(nombre))
             {
                 MessageBox.Show("El nombre Ingresado es Invalido");
+                SonidoError();
             }
 
             if (!float.TryParse(precioPorKilo, out valorPrecioPorKg) && valorPrecioPorKg <= 0)
             {
                 MessageBox.Show("El precio ingresado es invalido");
+                SonidoError();
             }
             if (!float.TryParse(cantidadDeKilos, out valorCantidadKg) && valorCantidadKg < 0)
             {
                 MessageBox.Show("El precio ingresado es invalido");
+                SonidoError();
             }
 
 
@@ -130,17 +134,21 @@ namespace VisualParcial1
         {
             this.Hide();
             frmAbmHladera.Show();
+            SonidoVolverAtras();
         }
 
-
-
-        // solicito todos los datos del producto nuevo desde el form
-
-
-        // guardo los datos en el Producto
-        // Dentro del scoppe del metodo para guardar el producto o
-        // Cuando se presiona el boton guardar le cambio el estado a mi variable DialogResult
-        // this.DialogResult = DialogResult.OK; el this hace referenica a este estado
-
+        private void SonidoError()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+              
+        private void SonidoVolverAtras()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
     }
 }

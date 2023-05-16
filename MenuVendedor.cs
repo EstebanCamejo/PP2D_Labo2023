@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace VisualParcial1
 {
@@ -14,13 +15,12 @@ namespace VisualParcial1
     {
         AbmHeladera frmHeladera;
         FrmListadoDeFacturacion frmFacturacion;
-        FrmVentas frmVentas;
-        Login login;
+        FrmCompraVenta frmCompraVenta;
 
-        public MenuVendedor(Login login)
+
+        public MenuVendedor()
         {
             InitializeComponent();
-            this.login = login;
         }
 
         private void btn_Inventario_Click(object sender, EventArgs e)
@@ -28,6 +28,7 @@ namespace VisualParcial1
             if (frmHeladera == null)
             {
                 frmHeladera = new AbmHeladera(this);
+                SonidoElegirOpcion();
                 frmHeladera.Show();
                 this.Hide();
             }
@@ -35,10 +36,11 @@ namespace VisualParcial1
 
         private void btn_Ventas_Click(object sender, EventArgs e)
         {
-            if (frmVentas == null)
+            if (frmCompraVenta == null)
             {
-                frmVentas = new FrmVentas(this);
-                frmVentas.Show();
+                frmCompraVenta = new FrmCompraVenta(this);
+                SonidoElegirOpcion();
+                frmCompraVenta.Show();
                 this.Hide();
             }
         }
@@ -48,15 +50,20 @@ namespace VisualParcial1
             if (frmFacturacion == null)
             {
                 frmFacturacion = new FrmListadoDeFacturacion(this);
+                SonidoElegirOpcion();
                 frmFacturacion.Show();
                 this.Hide();
             }
         }
+       
 
-        private void btn_VolverAtras_Click(object sender, EventArgs e)
+        private void SonidoElegirOpcion()
         {
-            this.Hide();
-            login.Show();
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectMarioCoinOK.wav"; ; // Ruta del archivo de sonido
+            player.Play();
         }
+
+        
     }
 }
