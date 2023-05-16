@@ -102,15 +102,15 @@ namespace VisualParcial1
 
             if (!Regex.IsMatch(nombreCliente, @"^[a-zA-Z]+$"))
             {
-                MessageBox.Show("El nombre ingresado es inválido. Debe contener solo letras.");
                 SonidoError();
+                MessageBox.Show("El nombre ingresado es inválido. Debe contener solo letras.");                
                 retorno = false;
             }
 
             if (!Regex.IsMatch(apellidoCliente, @"^[a-zA-Z]+$"))
             {
-                MessageBox.Show("El apellido ingresado es inválido. Debe contener solo letras.");
                 SonidoError();
+                MessageBox.Show("El apellido ingresado es inválido. Debe contener solo letras.");                
                 retorno = false;
             }
             return retorno;
@@ -219,18 +219,20 @@ namespace VisualParcial1
                 if (!float.TryParse(cantidadSolicitadaString, out float cantidadSolicitada))
                 {
                     // El valor ingresado no es un número válido
+                    SonidoError();
                     MessageBox.Show("Ingrese un valor numérico válido para la cantidad solicitada.");
                     dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío
-                    SonidoError();
+                    
                     return;
 
                 }
                 else if (cantidadSolicitada < 1)
                 {
                     // La cantidad solicitada ingresada no es un número válido
+                    SonidoError();
                     MessageBox.Show("La cantidad solicitada debe ser mayor a 0.");
                     dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío
-                    SonidoError();
+                    
                     return;
 
                 }
@@ -284,16 +286,16 @@ namespace VisualParcial1
                             }
                             else
                             {
-                                MessageBox.Show("Su saldo disponible no es suficiente para efectuar la compra.");
-                                dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío
                                 SonidoError();
+                                MessageBox.Show("Su saldo disponible no es suficiente para efectuar la compra.");
+                                dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío                                
                             }
                         }
                         else
                         {
-                            MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
-                            dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío
                             SonidoError();
+                            MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
+                            dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío                            
                         }
                     }
                 }
@@ -348,8 +350,8 @@ namespace VisualParcial1
         {
             if (nuevoCliente == null)
             {
-                MessageBox.Show("Por favor, ingrese los datos solicitados");
                 SonidoError();
+                MessageBox.Show("Por favor, ingrese los datos solicitados");                
                 return;
             }
             if (puedePagar)

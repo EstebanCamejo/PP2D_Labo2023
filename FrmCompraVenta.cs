@@ -81,8 +81,8 @@ namespace VisualParcial1
         {
             if (cliente == null)
             {
-                MessageBox.Show("Antes de continuar es obligatorio \n seleccionar un cliente");
                 SonidoError();
+                MessageBox.Show("Antes de continuar es obligatorio \n seleccionar un cliente");                
                 return;
             }
 
@@ -135,15 +135,15 @@ namespace VisualParcial1
                 }
                 else
                 {
-                    MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
                     SonidoError();
+                    MessageBox.Show("La demanda solicitada de este producto no esta disponible.");                    
                 }
                 txb_CantKg.Text = "";
             }
             else
             {
-                MessageBox.Show("La Cantidad Ingresada es Invalida");
                 SonidoError();
+                MessageBox.Show("La Cantidad Ingresada es Invalida");                
             }
 
         }
