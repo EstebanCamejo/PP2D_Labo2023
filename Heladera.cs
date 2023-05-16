@@ -106,9 +106,9 @@ namespace PPLabo2_2D
             {
                 if(p.CodigoDeProducto == producto.CodigoDeProducto)
                 {                   
-                    if (p.CantidadDeKilos>= producto.CantidadDeKilos)
+                    if (p.CantidadDeKilos>= producto.CantidadSolicitada)
                     {
-                        p.CantidadDeKilos -= producto.CantidadDeKilos;
+                        p.CantidadDeKilos -= producto.CantidadSolicitada;
                         
                         return true;
                     }                                        
@@ -126,7 +126,7 @@ namespace PPLabo2_2D
         {
             foreach (Producto p in this.listaProducto)
             {
-                if (p.CodigoDeProducto == producto.CodigoDeProducto && p.CantidadDeKilos >= producto.CantidadSolicitada)
+                if (p.Nombre == producto.Nombre && p.CantidadDeKilos >= producto.CantidadSolicitada)
                 {
                     return true;               
                 }
@@ -147,6 +147,50 @@ namespace PPLabo2_2D
             }
             return false;
         }
+
+        public Heladera HeladeraCargada()
+        {
+            this.listaProducto = CoreDelSistema.Productos;
+
+            return this;
+        }
+        
+        public Producto DevolverProducto (int Id)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.CodigoDeProducto == Id)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        public Producto DevolverProducto(Producto producto)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.CodigoDeProducto == producto.CodigoDeProducto)
+                {                    
+                    return p;                    
+                }
+            }
+            return null;
+        }
+
+        public Producto DevolverProducto(string nombre)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.Nombre == nombre)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
 
     }
     }

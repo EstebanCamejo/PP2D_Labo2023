@@ -10,7 +10,7 @@ namespace PPLabo2_2D
 {
     public class Factura
     {
-        private List<Producto>producto;
+        private List<Producto> listaDeProductosEnFactura;
         private Cliente cliente;
         private float totalPorProducto;
         private float subtotalFactura;
@@ -24,19 +24,20 @@ namespace PPLabo2_2D
         public Factura()
         {
             this.fechaActual = DateTime.Now;
+            ultimoNumeroFactura++;
         }
 
-        public Factura(List<Producto> producto, Cliente cliente)
+        public Factura(List<Producto> listaDeProductosEnFactura, Cliente cliente)
         {
-            this.producto = producto;
+            this.listaDeProductosEnFactura = listaDeProductosEnFactura;
             this.cliente = cliente;
             this.fechaActual = DateTime.Now;
 
         }
-        public Factura(List<Producto> producto, Cliente cliente, float totalPorProducto, 
-        float subtotalFactura, float ivaFactura, float totalFactura, float recargo) : this (producto,cliente)
+        public Factura(List<Producto> listaDeProductosEnFactura, Cliente cliente, float totalPorProducto, 
+        float subtotalFactura, float ivaFactura, float totalFactura, float recargo) : this (listaDeProductosEnFactura, cliente)
         {
-            this.producto = producto;
+            this.listaDeProductosEnFactura = listaDeProductosEnFactura;
             this.cliente = cliente;
             this.totalPorProducto = totalPorProducto;
             this.subtotalFactura = subtotalFactura;
@@ -46,11 +47,11 @@ namespace PPLabo2_2D
             ultimoNumeroFactura++;
             this.fechaActual = DateTime.Now;
         }
-        public Factura (List<Producto> producto, Cliente cliente, float totalPorProducto,
+        public Factura (List<Producto> listaDeProductosEnFactura, Cliente cliente, float totalPorProducto,
         float subtotalFactura, float ivaFactura, float totalFactura, float recargo, int numeroDeFactura) :
-            this(producto,cliente, totalPorProducto, subtotalFactura, ivaFactura, totalFactura, recargo)
+            this(listaDeProductosEnFactura, cliente, totalPorProducto, subtotalFactura, ivaFactura, totalFactura, recargo)
         {
-            this.producto = producto;
+            this.listaDeProductosEnFactura = listaDeProductosEnFactura;
             this.cliente = cliente;
             this.totalPorProducto = totalPorProducto;
             this.subtotalFactura = subtotalFactura;
@@ -63,14 +64,14 @@ namespace PPLabo2_2D
 
 
 
-        public List<Producto> Producto { get => this.producto; }
+        public List<Producto> ListaDeProductosEnFactura { get => this.listaDeProductosEnFactura; }
 
         public Cliente Cliente 
         { 
             get => this.cliente; 
             set =>this.cliente = value;
         }
-        
+       
         public float TotalPorProducto 
         { 
             get => this.totalPorProducto;
@@ -106,7 +107,10 @@ namespace PPLabo2_2D
             get => this.recargo;
             set { this.recargo = value; }           
         }
-
+        public string Apellido
+        {
+            get => this.Cliente.Apellido;
+        }
         public DateTime FechaActual
         {
             get => this.fechaActual;
@@ -143,27 +147,27 @@ namespace PPLabo2_2D
         /// <param name="producto"></param>
         /// <returns></returns>
         public Factura GenerarFactura(Cliente clienteFacturar, List<Producto> producto)
-        {           
-            this.producto = new List<Producto>();
-
+        {
+            listaDeProductosEnFactura = new List<Producto>();
+            cliente = clienteFacturar;
             foreach (Producto p in producto)
             {                
                 if (p.CantidadSolicitada > 0)
                 {
-                    this.Producto.Add(p);
+                    this.ListaDeProductosEnFactura.Add(p);
                     this.SubtotalFactura += p.CantidadSolicitada * p.PrecioPorKilo;
                 }
             }
             this.IvaFactura = CalcularIva(SubtotalFactura);
             this.TotalFactura = SubtotalFactura + IvaFactura;
 
-            if (clienteFacturar.TipoDePago == ETipoDePago.tarjeta)
+            if (cliente.TipoDePago == ETipoDePago.tarjeta)
             {
                 this.Recargo = RecargoTarjetaDeCredito(totalFactura);
                 this.totalFactura += Recargo;
             }
             this.NumeroDeFactura = ultimoNumeroFactura;
-            clienteFacturar.GuardarFactura(this);
+            cliente.GuardarFactura(this);
             CoreDelSistema.GuardarNuevaFactura(this);
             return this;
         }
@@ -174,7 +178,7 @@ namespace PPLabo2_2D
         /// <returns></returns>
         public override string ToString()
         {                  
-            return $"FC nº - {NumeroDeFactura} - Cliente: {Cliente.Nombre} {Cliente.Apellido} - Cuit: {Cliente.Cuit} - TOTAL ${TotalFactura}";
+            return $"{Cliente.Nombre} {Cliente.Apellido}";
         }
 
 

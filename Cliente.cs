@@ -12,8 +12,7 @@ namespace PPLabo2_2D
         // nombre -> lo hereda
         private string apellido;
         private float billetera;
-        private long cuit;
-        private string direccion;
+        private long cuit;        
         private static int idCliente;
         private static int ultimoIdCliente = 0;
         private ETipoDePago tipoDePago;
@@ -27,22 +26,21 @@ namespace PPLabo2_2D
             this.factura = new List<Factura> ();
         }
         public Cliente(string nombreUsuario, string contrasenia, string nombre,string apellido, float billetera,
-            long cuit, string direccion, ETipoDePago tipoDePago): base (nombreUsuario, contrasenia, nombre)
+            long cuit, ETipoDePago tipoDePago): base (nombreUsuario, contrasenia, nombre)
         {
             this.Apellido = apellido;
             this.Billetera = billetera;
-            this.Cuit = cuit;
-            this.Direccion = direccion;
+            this.Cuit = cuit;           
             this.tipoDePago = tipoDePago;
             ultimoIdCliente++;
             this.factura = new List<Factura>();
 
         }
 
+        
         public string Apellido { get => apellido; set => apellido = value; }
         public float Billetera { get => billetera; set => billetera = value; }
-        public long Cuit { get => cuit; set => cuit = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
+        public long Cuit { get => cuit; set => cuit = value; }       
 
         public List<Factura> Factura { get => this.factura; }
 
@@ -121,10 +119,10 @@ namespace PPLabo2_2D
             return false;
         }
 
-        public override string ToString()
-        {
-            return $" {Nombre} {Apellido} - Cuit: {Cuit}";
-        }
+        //public override string ToString()
+        //{
+        //    return $" {Nombre} {Apellido} - Cuit: {Cuit}";
+        //}
 
 
 
@@ -143,6 +141,9 @@ namespace PPLabo2_2D
                 return this.factura[this.factura.Count - 1]; // Devuelve el último elemento de la lista de facturas.
             }
         }
-
+        public override string ToString()
+        {
+            return $"{Nombre} {Apellido}";
+        }
     }
 }

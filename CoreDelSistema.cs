@@ -35,15 +35,15 @@ namespace PPLabo2_2D
         /// </summary>
         private static void CargarClaseClientes()
         {
-            CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",999999,301111111,"Lonesirum 2014", ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Graham","Coxon",999999,301111112,"Parklife 1992",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",999999,301111113,"Guemes 821",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Miles","Kane",999999,301111114,"Closer 2012",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Kevin","Shields",999999,301111115,"Loomer 1991",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Stephen","Malkmus",999999,301111116,"Mirror 2011",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Kurt","Vile",999999,301111117,"Bouttle 2018",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",999999,301111118,"Family 2012",ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",999999,301111119,"Bosanova 1991",ETipoDePago.efectivo));                        
+            CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",999999,301111111, ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Graham","Coxon",999999,301111112,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",999999,301111113,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Miles","Kane",999999,301111114,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Kevin","Shields",999999,301111115,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Stephen","Malkmus",999999,301111116,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Kurt","Vile",999999,301111117,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",999999,301111118,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",999999,301111119,ETipoDePago.efectivo));                        
         }
 
         /// <summary>
