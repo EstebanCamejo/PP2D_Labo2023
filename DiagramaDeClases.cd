@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="PPLabo2_2D.Cliente">
-    <Position X="2.75" Y="2.25" Width="1.5" />
+    <Position X="1.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAQAAAAIQAIAAEACDAAAAAIAAASCAECAgABAAAAEA=</HashCode>
+      <HashCode>AEAAQAAAAIQAAAAEAADAAAAAIAAASCAECAgABAAAAEA=</HashCode>
       <FileName>Cliente.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,26 +17,26 @@
   <Class Name="PPLabo2_2D.Factura" Collapsed="true">
     <Position X="7.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAACEBAEAoEQBCCAAIAgBACEAAAAACABBAAgAQ=</HashCode>
+      <HashCode>AAAAQAAACEAAEAoEABCCAAMAgBADEAAAAACABBAAgAQ=</HashCode>
       <FileName>Factura.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PPLabo2_2D.Heladera" Collapsed="true">
     <Position X="7.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAEAAAAAMAAAAAAAAQAAAAAAAQIAAAAAAAAAAIAE=</HashCode>
+      <HashCode>QAAAAEgAAAAMAAAAAAAAQAgAAAAAQIAAAAAAAAAAIAE=</HashCode>
       <FileName>Heladera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PPLabo2_2D.Producto" Collapsed="true">
     <Position X="9" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAICgAwCAADcQAAAgAAAACAAAABEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAABAICgAwCAADYQAAAgAAAACAAAABEAAAAAAAAAAA=</HashCode>
       <FileName>Producto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PPLabo2_2D.Usuario" Collapsed="true">
-    <Position X="4" Y="1" Width="1.5" />
+  <Class Name="PPLabo2_2D.Usuario">
+    <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAEACAAAAAgAAAAAAAAAAAAIAAAACAAAA=</HashCode>
       <FileName>Usuario.cs</FileName>

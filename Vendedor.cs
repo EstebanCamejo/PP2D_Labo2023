@@ -15,8 +15,7 @@ namespace PPLabo2_2D
         public Vendedor (string nombreUsuario, string contrasenia, string nombre) :
             base(nombreUsuario, contrasenia, nombre)
         {
-            this.heladera = new Heladera(CoreDelSistema.Productos);
-           
+            this.heladera = new Heladera(CoreDelSistema.Productos);           
         }
 
       /// <summary>
@@ -28,21 +27,19 @@ namespace PPLabo2_2D
       /// <param name="productos"></param>
       /// <returns></returns>
         public bool VenderProductos(Cliente cliente, List<Producto> productos)
-        {                                  
-            foreach(Producto p in productos)
+        {
+            try
             {
-                if (!this.heladera.DisponibilidadProducto(p))
-                {                   
-                    return false;
-                }
+                Factura factura = new Factura();
+                factura.GenerarFactura(cliente, productos);
+                cliente.PagarFactura(factura);
 
+                return true;
             }
-            Factura factura = new Factura();
-
-            factura.GenerarFactura(cliente, productos);
-            cliente.PagarFactura(factura);
-
-            return true;   
+            catch (Exception)
+            {
+                return false;
+            }           
         }
         /// <summary>
         /// Retorna el estado actual de la heladera

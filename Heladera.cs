@@ -9,11 +9,11 @@ namespace PPLabo2_2D
     public class Heladera
     {
         private List<Producto> listaProducto;
-
         public Heladera() 
         {
             this.listaProducto = new List<Producto>();  
         }
+
         public Heladera(List<Producto> productos) 
         {
             this.listaProducto = productos;
@@ -22,28 +22,38 @@ namespace PPLabo2_2D
         public List<Producto> ListaProducto
         {
             get { return this.listaProducto; }
+            set { this.listaProducto = value;}
         }
         /// <summary>
         /// El metodo recibe un nuevo producto y luego de confirmar que no se encuentra en la lista se guarda en la misma
         /// </summary>
         /// <param name="producto"></param>
         /// <returns></returns>
-        public bool ActualizarProductoEnLalista(Producto producto)
+        public Heladera ActualizarProductoEnLalista(Producto producto, List<Producto>productosHeladera)
         {
-            if (producto is not null)
-            {              
-                for (int i = 0;i < this.listaProducto.Count;i++) 
-                {
-                    if (listaProducto[i].CodigoDeProducto==producto.CodigoDeProducto)     
-                    {
-                        listaProducto[i] = producto;
+            try
+            {
+                Heladera listaProductoActualizada = new Heladera(productosHeladera);
 
-                        return true;
-                        break;
+                if (producto is not null)
+                {
+                    for (int i = 0; i < listaProductoActualizada.ListaProducto.Count; i++)
+                    {
+                        if (listaProductoActualizada.ListaProducto[i].Nombre == producto.Nombre)
+                        {
+                            listaProductoActualizada.ListaProducto[i].CantidadDeKilos -= producto.CantidadSolicitada;
+
+                            return listaProductoActualizada;
+                        }
                     }
-                }                                
+                }
             }
-            return false;
+            catch (Exception) 
+            {
+                throw;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -53,19 +63,27 @@ namespace PPLabo2_2D
         /// <returns></returns>
         public bool AgregarProductoALista(Producto producto)
         {
-            if(producto is not null)
+            try
             {
-                foreach(Producto p in this.listaProducto) 
+                if (producto is not null)
                 {
-                    if (p.CodigoDeProducto == producto.CodigoDeProducto)
+                    foreach (Producto p in this.listaProducto)
                     {
-                        return false;
-                        break;
+                        if (p.Nombre == producto.Nombre)
+                        {
+                            return false;
+                            break;
+                        }
                     }
+                    listaProducto.Add(producto);
+                    return true;
                 }
-                listaProducto.Add(producto);    
-                return true;
             }
+            catch (Exception)
+            {
+                throw; 
+            }
+            
             return false;   
         }
 
@@ -102,18 +120,26 @@ namespace PPLabo2_2D
         /// <returns></returns>
         public bool ActualizarCantidad (Producto producto)
         {
-            foreach (Producto p in this.listaProducto)
+            try
             {
-                if(p.CodigoDeProducto == producto.CodigoDeProducto)
-                {                   
-                    if (p.CantidadDeKilos>= producto.CantidadDeKilos)
+                foreach (Producto p in this.listaProducto)
+                {
+                    if (p.CodigoDeProducto == producto.CodigoDeProducto)
                     {
-                        p.CantidadDeKilos -= producto.CantidadDeKilos;
-                        
-                        return true;
-                    }                                        
-                }                
+                        if (p.CantidadDeKilos >= producto.CantidadSolicitada)
+                        {
+                            p.CantidadDeKilos -= producto.CantidadSolicitada;
+
+                            return true;
+                        }
+                    }
+                }
+            }            
+            catch (Exception) 
+            {
+                throw;
             }
+            
             return false;
         }
 
@@ -124,13 +150,20 @@ namespace PPLabo2_2D
         /// <returns></returns>
         public bool DisponibilidadProducto (Producto producto)
         {
-            foreach (Producto p in this.listaProducto)
+            try
             {
-                if (p.CodigoDeProducto == producto.CodigoDeProducto && p.CantidadDeKilos >= producto.CantidadSolicitada)
+                foreach (Producto p in this.listaProducto)
                 {
-                    return true;               
+                    if (p.Nombre == producto.Nombre && p.CantidadDeKilos >= producto.CantidadSolicitada)
+                    {
+                        return true;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                throw;
+            }        
             return false;
         }
         /// <summary>
@@ -140,13 +173,70 @@ namespace PPLabo2_2D
         /// <returns></returns>
         public bool ActualizarProductosDeLaHeladera(List<Producto> producto)
         {
-            if (producto is not null)
+            try
             {
-                this.listaProducto = producto;
-                return true;
+                if (producto is not null)
+                {
+                    this.listaProducto = producto;
+                    return true;
+                }
             }
+            catch (Exception) 
+            {
+                throw;
+            }           
             return false;
         }
+
+        public Heladera HeladeraCargada()
+        {
+            try
+            {
+                this.listaProducto = CoreDelSistema.Productos;
+                return this;
+            }
+            catch (Exception) 
+            {
+                throw;
+            }                       
+        }
+        
+        public Producto DevolverProducto (int Id)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.CodigoDeProducto == Id)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        public Producto DevolverProducto(Producto producto)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.CodigoDeProducto == producto.CodigoDeProducto)
+                {                    
+                    return p;                    
+                }
+            }
+            return null;
+        }
+
+        public Producto DevolverProducto(string nombre)
+        {
+            foreach (Producto p in this.listaProducto)
+            {
+                if (p.Nombre == nombre)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
 
     }
     }
