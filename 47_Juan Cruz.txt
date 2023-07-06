@@ -1,0 +1,4 @@
+Fecha: 04/07/2023 17:44:02
+Número de Factura: 47
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 12100

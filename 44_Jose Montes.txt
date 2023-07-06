@@ -1,0 +1,4 @@
+Fecha: 04/07/2023 1:39:08
+Número de Factura: 44
+Nombre de la Factura: Jose Montes
+Total de la Factura: 3236,75

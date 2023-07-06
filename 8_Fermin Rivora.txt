@@ -1,0 +1,4 @@
+Fecha: 30/06/2023 17:04:26
+Número de Factura: 8
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 3025

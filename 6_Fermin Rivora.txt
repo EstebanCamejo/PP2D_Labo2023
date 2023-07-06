@@ -1,0 +1,4 @@
+Fecha: 30/06/2023 16:59:00
+Número de Factura: 6
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 13552

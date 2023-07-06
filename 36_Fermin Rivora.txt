@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 17:16:45
+Número de Factura: 36
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 3025

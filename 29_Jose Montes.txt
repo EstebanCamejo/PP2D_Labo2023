@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 23:53:38
+Número de Factura: 29
+Nombre de la Factura: Jose Montes
+Total de la Factura: 3025

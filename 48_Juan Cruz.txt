@@ -1,0 +1,4 @@
+Fecha: 06/07/2023 16:15:05
+Número de Factura: 48
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 6473,5

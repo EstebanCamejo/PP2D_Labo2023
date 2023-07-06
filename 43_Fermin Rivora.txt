@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 22:30:15
+Número de Factura: 43
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 4779,5

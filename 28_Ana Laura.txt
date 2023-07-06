@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 23:51:59
+Número de Factura: 28
+Nombre de la Factura: Ana Laura
+Total de la Factura: 1815

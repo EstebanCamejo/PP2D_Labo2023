@@ -1,0 +1,4 @@
+Fecha: 30/06/2023 16:10:59
+Número de Factura: 1
+Nombre de la Factura: Ana Laura
+Total de la Factura: 6050

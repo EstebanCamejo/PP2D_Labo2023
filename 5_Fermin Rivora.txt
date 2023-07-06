@@ -1,0 +1,4 @@
+Fecha: 29/06/2023 18:36:06
+Número de Factura: 5
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 6352,5

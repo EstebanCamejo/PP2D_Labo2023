@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 19:06:24
+Número de Factura: 19
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 12947

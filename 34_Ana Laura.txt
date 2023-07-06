@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 17:06:03
+Número de Factura: 34
+Nombre de la Factura: Ana Laura
+Total de la Factura: 1089

@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 11:47:14
+Número de Factura: 31
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 3025

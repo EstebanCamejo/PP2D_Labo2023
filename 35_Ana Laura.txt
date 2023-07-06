@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 17:07:25
+Número de Factura: 35
+Nombre de la Factura: Ana Laura
+Total de la Factura: 2420

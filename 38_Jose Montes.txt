@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 18:14:02
+Número de Factura: 38
+Nombre de la Factura: Jose Montes
+Total de la Factura: 955,9

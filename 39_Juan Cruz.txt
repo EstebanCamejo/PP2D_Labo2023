@@ -1,0 +1,4 @@
+Fecha: 03/07/2023 18:18:01
+Número de Factura: 39
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 5324

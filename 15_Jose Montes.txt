@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 18:50:51
+Número de Factura: 15
+Nombre de la Factura: Jose Montes
+Total de la Factura: 5082

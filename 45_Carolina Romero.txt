@@ -1,0 +1,4 @@
+Fecha: 04/07/2023 12:02:30
+Número de Factura: 45
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 7260

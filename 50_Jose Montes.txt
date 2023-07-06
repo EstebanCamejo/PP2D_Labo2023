@@ -1,0 +1,4 @@
+Fecha: 06/07/2023 16:22:38
+Número de Factura: 50
+Nombre de la Factura: Jose Montes
+Total de la Factura: 11797,5

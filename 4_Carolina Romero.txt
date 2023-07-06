@@ -1,0 +1,4 @@
+Fecha: 29/06/2023 18:34:33
+Número de Factura: 4
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 18997

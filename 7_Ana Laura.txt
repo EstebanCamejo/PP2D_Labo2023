@@ -1,0 +1,4 @@
+Fecha: 30/06/2023 17:03:33
+Número de Factura: 7
+Nombre de la Factura: Ana Laura
+Total de la Factura: 1911,8

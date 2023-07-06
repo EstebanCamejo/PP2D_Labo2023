@@ -1,0 +1,4 @@
+Fecha: 28/06/2023 21:25:57
+Número de Factura: 3
+Nombre de la Factura: Ana Laura
+Total de la Factura: 11041,25

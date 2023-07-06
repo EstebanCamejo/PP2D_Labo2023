@@ -1,0 +1,4 @@
+Fecha: 28/06/2023 21:24:24
+Número de Factura: 2
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 6292

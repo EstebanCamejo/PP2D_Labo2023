@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 19:00:42
+Número de Factura: 17
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 9680

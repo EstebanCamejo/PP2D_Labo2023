@@ -1,0 +1,4 @@
+Fecha: 01/07/2023 0:29:09
+Número de Factura: 9
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 4537,5

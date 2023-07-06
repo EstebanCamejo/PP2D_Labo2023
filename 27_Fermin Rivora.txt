@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 23:50:11
+Número de Factura: 27
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 12098,79

@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 18:43:11
+Número de Factura: 14
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 2178

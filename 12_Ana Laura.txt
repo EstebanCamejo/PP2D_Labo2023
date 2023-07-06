@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 18:28:42
+Número de Factura: 12
+Nombre de la Factura: Ana Laura
+Total de la Factura: 27225

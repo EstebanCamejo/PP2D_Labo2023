@@ -1,0 +1,4 @@
+Fecha: 28/06/2023 21:23:49
+Número de Factura: 1
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 2420

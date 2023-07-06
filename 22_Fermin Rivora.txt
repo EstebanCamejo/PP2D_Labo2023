@@ -1,0 +1,4 @@
+Fecha: 02/07/2023 22:41:18
+Número de Factura: 22
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 6776

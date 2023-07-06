@@ -1,0 +1,4 @@
+Fecha: 29/06/2023 20:38:23
+Número de Factura: 0
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 3388
