@@ -33,88 +33,177 @@
             btn_Inventario = new Button();
             btn_Ventas = new Button();
             btn_Facturacion = new Button();
-            btn_VolverAtras = new Button();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            pictureBox5 = new PictureBox();
+            label1 = new Label();
+            btn_Salir = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // lbl_Mensaje
             // 
             lbl_Mensaje.AutoSize = true;
-            lbl_Mensaje.Font = new Font("Lucida Fax", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_Mensaje.Location = new Point(151, 65);
+            lbl_Mensaje.BackColor = Color.Transparent;
+            lbl_Mensaje.Font = new Font("Lucida Fax", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_Mensaje.ForeColor = SystemColors.MenuBar;
+            lbl_Mensaje.Location = new Point(99, 68);
             lbl_Mensaje.Margin = new Padding(4, 0, 4, 0);
             lbl_Mensaje.Name = "lbl_Mensaje";
-            lbl_Mensaje.Size = new Size(675, 27);
+            lbl_Mensaje.Size = new Size(568, 23);
             lbl_Mensaje.TabIndex = 0;
             lbl_Mensaje.Text = "Por favor, seleccione una de las siguientes opciones";
             // 
             // btn_Inventario
             // 
             btn_Inventario.BackColor = Color.Transparent;
-            btn_Inventario.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Inventario.Location = new Point(229, 146);
+            btn_Inventario.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Inventario.Location = new Point(197, 140);
             btn_Inventario.Margin = new Padding(4, 3, 4, 3);
             btn_Inventario.Name = "btn_Inventario";
-            btn_Inventario.Size = new Size(503, 29);
+            btn_Inventario.Size = new Size(307, 52);
             btn_Inventario.TabIndex = 1;
-            btn_Inventario.Text = "Inventario de Productos";
+            btn_Inventario.Text = "Inventario ";
             btn_Inventario.UseVisualStyleBackColor = false;
             btn_Inventario.Click += btn_Inventario_Click;
+            btn_Inventario.MouseEnter += btn_Inventario_MouseEnter;
+            btn_Inventario.MouseLeave += btn_Inventario_MouseLeave;
             // 
             // btn_Ventas
             // 
             btn_Ventas.BackColor = Color.Transparent;
-            btn_Ventas.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Ventas.Location = new Point(229, 208);
+            btn_Ventas.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Ventas.Location = new Point(197, 340);
             btn_Ventas.Margin = new Padding(4, 3, 4, 3);
             btn_Ventas.Name = "btn_Ventas";
-            btn_Ventas.Size = new Size(503, 29);
+            btn_Ventas.Size = new Size(307, 52);
             btn_Ventas.TabIndex = 2;
-            btn_Ventas.Text = "Realizar Ventas y Pedidos";
+            btn_Ventas.Text = "   Ventas y Pedidos";
             btn_Ventas.UseVisualStyleBackColor = false;
             btn_Ventas.Click += btn_Ventas_Click;
+            btn_Ventas.MouseEnter += btn_Ventas_MouseEnter;
+            btn_Ventas.MouseLeave += btn_Ventas_MouseLeave;
             // 
             // btn_Facturacion
             // 
             btn_Facturacion.BackColor = Color.Transparent;
-            btn_Facturacion.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Facturacion.Location = new Point(229, 270);
+            btn_Facturacion.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Facturacion.Location = new Point(197, 240);
             btn_Facturacion.Margin = new Padding(4, 3, 4, 3);
             btn_Facturacion.Name = "btn_Facturacion";
-            btn_Facturacion.Size = new Size(503, 29);
+            btn_Facturacion.Size = new Size(307, 52);
             btn_Facturacion.TabIndex = 3;
-            btn_Facturacion.Text = "Facturacion";
+            btn_Facturacion.Text = "   Facturacion";
             btn_Facturacion.UseVisualStyleBackColor = false;
             btn_Facturacion.Click += btn_Facturacion_Click;
+            btn_Facturacion.MouseEnter += btn_Facturacion_MouseEnter;
+            btn_Facturacion.MouseLeave += btn_Facturacion_MouseLeave;
             // 
-            // btn_VolverAtras
+            // pictureBox1
             // 
-            btn_VolverAtras.BackColor = Color.Transparent;
-            btn_VolverAtras.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_VolverAtras.Location = new Point(414, 322);
-            btn_VolverAtras.Margin = new Padding(4, 3, 4, 3);
-            btn_VolverAtras.Name = "btn_VolverAtras";
-            btn_VolverAtras.Size = new Size(134, 29);
-            btn_VolverAtras.TabIndex = 4;
-            btn_VolverAtras.Text = "Atras";
-            btn_VolverAtras.UseVisualStyleBackColor = false;
-            btn_VolverAtras.Click += btn_VolverAtras_Click;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-1, -11);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(350, 535);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(571, 340);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(105, 106);
+            pictureBox2.TabIndex = 6;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = SystemColors.MenuBar;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(261, 249);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(39, 39);
+            pictureBox3.TabIndex = 7;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackColor = SystemColors.MenuBar;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(236, 348);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(44, 39);
+            pictureBox4.TabIndex = 8;
+            pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = SystemColors.MenuBar;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(254, 148);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(46, 39);
+            pictureBox5.TabIndex = 9;
+            pictureBox5.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.MenuBar;
+            label1.Location = new Point(544, 464);
+            label1.Name = "label1";
+            label1.Size = new Size(151, 21);
+            label1.TabIndex = 10;
+            label1.Text = "FM Carnes SRL";
+            // 
+            // btn_Salir
+            // 
+            btn_Salir.Font = new Font("Lucida Fax", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Salir.Location = new Point(296, 426);
+            btn_Salir.Name = "btn_Salir";
+            btn_Salir.Size = new Size(112, 34);
+            btn_Salir.TabIndex = 11;
+            btn_Salir.Text = "Salir";
+            btn_Salir.UseVisualStyleBackColor = true;
+            btn_Salir.Click += button1_Click;
+            btn_Salir.MouseEnter += btn_Salir_MouseEnter;
+            btn_Salir.MouseLeave += btn_Salir_MouseLeave;
             // 
             // MenuVendedor
             // 
             AutoScaleDimensions = new SizeF(12F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightCoral;
-            ClientSize = new Size(960, 378);
-            Controls.Add(btn_VolverAtras);
+            BackColor = SystemColors.ControlText;
+            ClientSize = new Size(721, 524);
+            Controls.Add(btn_Salir);
+            Controls.Add(label1);
+            Controls.Add(pictureBox5);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
             Controls.Add(btn_Facturacion);
             Controls.Add(btn_Ventas);
             Controls.Add(btn_Inventario);
             Controls.Add(lbl_Mensaje);
+            Controls.Add(pictureBox1);
             Font = new Font("Lucida Fax", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MenuVendedor";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Vendedor";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -125,6 +214,12 @@
         private Button btn_Inventario;
         private Button btn_Ventas;
         private Button btn_Facturacion;
-        private Button btn_VolverAtras;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
+        private Label label1;
+        private Button btn_Salir;
     }
 }

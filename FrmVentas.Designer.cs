@@ -32,8 +32,6 @@
             cbb_SeleccionarCliente = new ComboBox();
             lbl_TitularVentas = new Label();
             lbl_SeleccionarCliente = new Label();
-            lbl_TopeDeConcesion = new Label();
-            txb_TopeDeConcesion = new TextBox();
             button1 = new Button();
             btn_VolverAtras = new Button();
             SuspendLayout();
@@ -52,7 +50,7 @@
             // 
             lbl_TitularVentas.AutoSize = true;
             lbl_TitularVentas.Font = new Font("Lucida Fax", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_TitularVentas.Location = new Point(545, 58);
+            lbl_TitularVentas.Location = new Point(537, 65);
             lbl_TitularVentas.Margin = new Padding(4, 0, 4, 0);
             lbl_TitularVentas.Name = "lbl_TitularVentas";
             lbl_TitularVentas.Size = new Size(227, 27);
@@ -69,25 +67,6 @@
             lbl_SeleccionarCliente.Size = new Size(183, 21);
             lbl_SeleccionarCliente.TabIndex = 2;
             lbl_SeleccionarCliente.Text = "Seleccionar Cliente";
-            // 
-            // lbl_TopeDeConcesion
-            // 
-            lbl_TopeDeConcesion.AutoSize = true;
-            lbl_TopeDeConcesion.Font = new Font("Lucida Fax", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_TopeDeConcesion.Location = new Point(68, 229);
-            lbl_TopeDeConcesion.Margin = new Padding(4, 0, 4, 0);
-            lbl_TopeDeConcesion.Name = "lbl_TopeDeConcesion";
-            lbl_TopeDeConcesion.Size = new Size(255, 21);
-            lbl_TopeDeConcesion.TabIndex = 3;
-            lbl_TopeDeConcesion.Text = "Tope de Concesion          $";
-            // 
-            // txb_TopeDeConcesion
-            // 
-            txb_TopeDeConcesion.Location = new Point(334, 226);
-            txb_TopeDeConcesion.Margin = new Padding(4, 3, 4, 3);
-            txb_TopeDeConcesion.Name = "txb_TopeDeConcesion";
-            txb_TopeDeConcesion.Size = new Size(200, 29);
-            txb_TopeDeConcesion.TabIndex = 4;
             // 
             // button1
             // 
@@ -121,8 +100,6 @@
             ClientSize = new Size(960, 378);
             Controls.Add(btn_VolverAtras);
             Controls.Add(button1);
-            Controls.Add(txb_TopeDeConcesion);
-            Controls.Add(lbl_TopeDeConcesion);
             Controls.Add(lbl_SeleccionarCliente);
             Controls.Add(lbl_TitularVentas);
             Controls.Add(cbb_SeleccionarCliente);
@@ -141,8 +118,6 @@
         private ComboBox cbb_SeleccionarCliente;
         private Label lbl_TitularVentas;
         private Label lbl_SeleccionarCliente;
-        private Label lbl_TopeDeConcesion;
-        private TextBox txb_TopeDeConcesion;
         private Button button1;
         private Button btn_VolverAtras;
     }

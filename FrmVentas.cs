@@ -16,14 +16,13 @@ namespace VisualParcial1
     {
         List<Cliente> ClienteSeleccionado;
         Cliente auxClienteVenta;
-        float topeDeConcesion;
-        bool soyVendedor;
+
+
         MenuVendedor frmMenuVendedor;
 
         public FrmVentas(MenuVendedor frmMenuVendedor)
         {
             InitializeComponent();
-            this.soyVendedor = true;
             this.frmMenuVendedor = frmMenuVendedor;
         }
 
@@ -40,26 +39,15 @@ namespace VisualParcial1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             Cliente? clienteVenta = ObtenerClienteDelListbox();
 
-            if (!float.TryParse(txb_TopeDeConcesion.Text, out topeDeConcesion) && topeDeConcesion > 0)
+            if (clienteVenta != null)
             {
-                MessageBox.Show("El monto ingresado es invalido");
+               // FrmCompraVenta compraVenta = new FrmCompraVenta();
+
+               // compraVenta.Show();
+                this.Hide();
             }
-            else
-            {
-                clienteVenta.Billetera = topeDeConcesion;
-            }
-
-            bool esVendedor = false;
-
-            FrmCompraVenta compraVenta = new FrmCompraVenta(clienteVenta, esVendedor, this);
-
-            compraVenta.Show();
-            this.Hide();
-
-
         }
 
         private Cliente? ObtenerClienteDelListbox()

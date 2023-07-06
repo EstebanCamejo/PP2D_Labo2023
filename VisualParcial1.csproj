@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PPLabo2_2D\PPLabo2_2D.csproj" />
   </ItemGroup>
 

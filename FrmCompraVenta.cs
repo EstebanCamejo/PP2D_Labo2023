@@ -9,60 +9,65 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Media;
+
 
 namespace VisualParcial1
 {
+    // Utilizo el delegado para representar mi evento
+    public delegate void ReponerStockEventHandler();
+
     public partial class FrmCompraVenta : Form
     {
         List<Producto> listaProductosComprados;
-        Cliente cliente;
+
         Heladera heladera;
         Producto auxProducto;
         int indiceProductoDgv = 0;
-        float saldoInicialCliente;
-        float totalAPagar = 0;
+        float totalAPagar;
         Vendedor vendedor;
-        bool esCLienteOVendedor;
-        MenuCliente frmMenuCliente;
-        FrmVentas frmVentas;
-        public FrmCompraVenta(Cliente clienteAFacturar, bool esVendedor, FrmVentas frmVentas)
-        {
-            InitializeComponent();
-            this.cliente = clienteAFacturar;
-            this.heladera = new Heladera();
-            this.saldoInicialCliente = cliente.Billetera;
-            this.listaProductosComprados = new List<Producto>();
-            this.vendedor = new Vendedor("UsuarioHardcodeado", "ContraseniaHardcodeada", "Vendedor1");
-            this.esCLienteOVendedor = esVendedor;
+        List<Cliente> ClienteSeleccionado;
+        bool puedePagar = false;
+        Cliente cliente;
+        MenuVendedor menuVendedor;
 
-            this.frmVentas = frmVentas;
-        }
-        public FrmCompraVenta(Cliente clienteAFacturar, bool esCliente, MenuCliente frmMenuCliente)
+        //Creacion del Evento
+        public event ReponerStockEventHandler ReponerStock;
+        public FrmCompraVenta(MenuVendedor frmMenuVendedor)
         {
             InitializeComponent();
-            this.cliente = clienteAFacturar;
+            // this.cliente = clienteAFacturar;
             this.heladera = new Heladera();
-            this.saldoInicialCliente = cliente.Billetera;
             this.listaProductosComprados = new List<Producto>();
             this.vendedor = new Vendedor("UsuarioHardcodeado", "ContraseniaHardcodeada", "Vendedor1");
-            this.esCLienteOVendedor = esCliente;
-            this.frmMenuCliente = frmMenuCliente;
+            this.menuVendedor = frmMenuVendedor;
+            this.cliente = null;
+
+            //suscribir metodo al evento
+            ReponerStock += MensajeDeAlertaReponerStock;
 
         }
 
+
+
+        /// <summary>
+        /// Cargo el formulario con los datos necesarios, actualizo la heladera para disponer de los productos
+        /// y actualizo las etiquetas con los datos del cliente que me llega por instanciacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmCompraVenta_Load(object sender, EventArgs e)
         {
+            ClienteSeleccionado = CoreDelSistema.Clientes;
+            cbb_SeleccionarCliente.Items.AddRange(ClienteSeleccionado.ToArray());
             dtgv_Productos.ReadOnly = true;
-            //  heladera.ActualizarProductosDeLaHeladera(CoreDelSistema.Productos);
             heladera = vendedor.Heladera;
             ActualizarListBoxDeProductos();
-            lbl_NombreCliente.Text = "Nombre: " + cliente.Nombre + cliente.Apellido;
-            lbl_Cuit.Text = "CUIT: " + cliente.Cuit.ToString();
-            lbl_SaldoDisponible.Text = "Saldo Disponible: " + cliente.Billetera.ToString();
-            lbl_TipoDePago.Text = "Tipo de Pago => " + cliente.TipoDePago.ToString();
-
         }
 
+        /// <summary>
+        /// Actualizo los productos en el list box obteniendo el listado de productos desde la heladera
+        /// </summary>
         private void ActualizarListBoxDeProductos()
         {
             cbb_SleccionProducto.DataSource = null;
@@ -70,165 +75,366 @@ namespace VisualParcial1
             cbb_SleccionProducto.DataSource = heladera.ListaProducto;
         }
 
+        /// <summary>
+        /// Obtengo el indice del proiducto en la lista, con este obtengo el producto seleccionado por el cliente
+        /// verifico si los campos ingresados son correctos los parseo a mi conveniencia y obtengo los detalles 
+        /// del producto seleccionado para la compra, verifico la disponibilidad en la heladera, chequeo que metodo de pago 
+        /// va a utilizar el cliente, compruebo que tenga saldo suficiente para agregar el producto a la lista, si es asi 
+        /// actualizo la heladera, el monto disponieble a gastar para el cliente. Actualizo el formulario y los datagrid 
+        /// con la informacion de la transaccion, actualizo la oinformacion para este producto en la compra y lo agrego a la lista.
+        /// En caso que alguno de los pasos sea invalido el usuario es informado.
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
-            int indiceProductoEnLaLista = ObtenerIndiceDelProductoEnHeladera();
-            Producto productoAgregado = ObtenerProductoDelDgv(indiceProductoEnLaLista);
-            float cantidadSolicitada;
-            float precioPorCantidad;
-            bool pagaConTarjeta = false;
-            // si toco el boton atras y se arrepiente de comprar recargar la billetera
-
-
-
-            if (float.TryParse(txb_CantKg.Text, out cantidadSolicitada) && cantidadSolicitada > 0)
+            try
             {
-                precioPorCantidad = ObtenerPrecioPorCantidad(cantidadSolicitada, productoAgregado.PrecioPorKilo);
-
-                indiceProductoDgv = dtgv_Productos.Rows.Add();
-
-                float ivaDelProductoAgregado = DevolverIvaDelProducto(precioPorCantidad);
-
-
-                //Comprobamos disponibilidad sobre la cantidad del producto
-
-                if (heladera.DisponibilidadProducto(productoAgregado))
+                if (cliente == null)
                 {
-                    //****CHEQUEAR SI ES CON TC o EFVO***
+                    SonidoError();
+                    MessageBox.Show("Antes de continuar es obligatorio \n seleccionar un cliente");
+                    return;
+                }
 
 
-                    if (cliente.TipoDePago == ETipoDePago.tarjeta)
+                int indiceProductoEnLaLista = ObtenerIndiceDelProductoEnHeladera();
+                Producto productoAgregado = ObtenerProductoDelDgv(indiceProductoEnLaLista);
+                float cantidadSolicitada;
+                float precioPorCantidad;
+                bool pagaConTarjeta = false;
+
+
+                // si toco el boton atras y se arrepiente de comprar recargar la billetera
+
+                if (float.TryParse(txb_CantKg.Text, out cantidadSolicitada) && cantidadSolicitada > 0)
+                {
+                    try
                     {
-                        pagaConTarjeta = true;
+                        precioPorCantidad = ObtenerPrecioPorCantidad(cantidadSolicitada, productoAgregado.PrecioPorKilo);
+
+                        if (cliente.Billetera >= (precioPorCantidad + DevolverIvaDelProducto(precioPorCantidad) + totalAPagar))
+                        {
+                            ActualizarTotalAPagarEnELForm(precioPorCantidad + DevolverIvaDelProducto(precioPorCantidad));
+                            //Comprobamos disponibilidad sobre la cantidad del producto
+                            productoAgregado.SetearCantidadSolicitada(cantidadSolicitada);
+
+                            if (heladera.DisponibilidadProducto(productoAgregado))
+                            {
+                                //****CHEQUEAR SI ES CON TC o EFVO***
+
+                                if (cliente.TipoDePago == ETipoDePago.tarjeta)
+                                {
+                                    pagaConTarjeta = true;
+                                }
+
+                                // Actualizar Heladera
+                                heladera = heladera.ActualizarProductoEnLalista(productoAgregado, heladera.ListaProducto);
+
+                                // Actualizamos el DataGrid
+                                indiceProductoDgv = dtgv_Productos.Rows.Add();
+                                dtgv_Productos.Rows[indiceProductoDgv].Cells[0].Value = productoAgregado.Nombre;
+                                dtgv_Productos.Rows[indiceProductoDgv].Cells[1].Value = productoAgregado.CantidadDeKilos.ToString();
+                                dtgv_Productos.Rows[indiceProductoDgv].Cells[2].Value = productoAgregado.PrecioPorKilo.ToString();
+                                dtgv_Productos.Rows[indiceProductoDgv].Cells[3].Value = txb_CantKg.Text;
+                                dtgv_Productos.Rows[indiceProductoDgv].Cells[4].Value = precioPorCantidad.ToString();
+
+                                // Agregamos Producto a la lista de compras                        
+
+                                productoAgregado.SetearPrecioPorCantidadSolicitada(precioPorCantidad);
+
+                                AgregarProductosAlChanguito(productoAgregado);
+                                puedePagar = true;
+                                SonidoAgregarAlChangitoOK();
+                            }
+                            else
+                            {
+                                SonidoError();
+                                MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
+
+                                //InvocarEvento Sin Stock
+                                ReponerStock.Invoke();
+                                ReponerStockEnHeladera(productoAgregado);
+                            }
+                            txb_CantKg.Text = "";
+                        }
+                        else
+                        {
+                            SonidoError();
+                            MessageBox.Show("El saldo del cliente es insuficiente para realizar la venta");
+                            txb_CantKg.Text = "";
+                        }
+
                     }
-
-
-
-                    // Actualizar billetera
-                    if (cliente.ActualizarBilletera(precioPorCantidad, pagaConTarjeta, ivaDelProductoAgregado))
+                    catch (Exception ex)
                     {
-                        // Actualizar Heladera
-                        heladera.ActualizarCantidad(productoAgregado);
-
-                        // Actualizamos el FRM
-                        ActualizarSaldoDisponibleEnELFrm(cliente.Billetera);
-                        ActualizarTotalAPagarEnELForm(saldoInicialCliente - cliente.Billetera);
-
-                        // Actualizamos el DataGrid
-                        dtgv_Productos.Rows[indiceProductoDgv].Cells[0].Value = productoAgregado.Nombre;
-                        dtgv_Productos.Rows[indiceProductoDgv].Cells[1].Value = productoAgregado.PrecioPorKilo.ToString();
-                        dtgv_Productos.Rows[indiceProductoDgv].Cells[2].Value = txb_CantKg.Text;
-                        dtgv_Productos.Rows[indiceProductoDgv].Cells[3].Value = precioPorCantidad.ToString();
-
-                        // Agregamos Producto a la lista de compras                        
-                        productoAgregado.SetearCantidadSolicitada(cantidadSolicitada);
-                        productoAgregado.SetearPrecioPorCantidadSolicitada(precioPorCantidad);
-
-                        AgregarProductosAlChanguito(productoAgregado);
-
+                        MessageBox.Show("Se produjo un error al intentar agregar el producto. " + ex.Message);
                     }
-                    else
-                    {
-                        MessageBox.Show("Su saldo disponible no es suficiente para efectuar la compra.");
-                    }
-
                 }
                 else
                 {
-                    MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
+                    SonidoError();
+                    MessageBox.Show("La Cantidad Ingresada es Invalida");
                 }
-                txb_CantKg.Text = "";
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("La Cantidad Ingresada es Invalida");
+                MessageBox.Show("Se produjo un error al agregar el producto. " + ex.Message);
             }
-
-
-
         }
         private int ObtenerIndiceDelProductoEnHeladera()
         {
-            int indice = heladera.ListaProducto.IndexOf(cbb_SleccionProducto.SelectedItem as Producto);
-            return indice;
+            try
+            {
+                int indice = heladera.ListaProducto.IndexOf(cbb_SleccionProducto.SelectedItem as Producto);
+                return indice;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al obtener el índice del producto en la heladera. " + ex.Message);
+                return -1; // Valor de índice inválido para indicar un error
+            }
         }
 
         private Producto ObtenerProductoDelDgv(int indiceProductoEnLaLista)
         {
-            if (indiceProductoEnLaLista >= 0)
+            try
             {
-                return auxProducto = heladera.ListaProducto[indiceProductoEnLaLista];
+                if (indiceProductoEnLaLista >= 0)
+                {
+                    return auxProducto = heladera.ListaProducto[indiceProductoEnLaLista];
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al obtener el producto del DataGridView. " + ex.Message);
+                return null;
+            }
         }
 
         private float ObtenerPrecioPorCantidad(float cantidadSolicitada, float precioPorKg)
         {
-            float precioPorCantidad = cantidadSolicitada * precioPorKg;
-
-            return precioPorCantidad;
-        }
-
-        private void ActualizarSaldoDisponibleEnELFrm(float billetera)
-        {
-            lbl_SaldoDisponible.Text = "Saldo Disponible: $" + (billetera).ToString();
-                                       
+            try
+            {
+                float precioPorCantidad = cantidadSolicitada * precioPorKg;
+                return precioPorCantidad;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al obtener el precio por cantidad. " + ex.Message);
+                return 0; // Valor de precio invalido para indicar un error
+            }
         }
 
         private void ActualizarTotalAPagarEnELForm(float precioPorCantidad)
         {
-            totalAPagar = precioPorCantidad;
-
-            lbl_TotalApagar.Text = "Total a Pagar:    $" + totalAPagar.ToString();
+            try
+            {
+                if (cliente.Billetera >= totalAPagar)
+                {
+                    totalAPagar += precioPorCantidad;
+                    lbl_TotalApagar.Text = "Total a Pagar:    $" + totalAPagar.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al actualizar el total a pagar. " + ex.Message);
+            }
         }
 
         private void AgregarProductosAlChanguito(Producto productoAgregado)
         {
-            listaProductosComprados.Add(productoAgregado);
+            try
+            {
+                listaProductosComprados.Add(productoAgregado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al agregar el producto al changuito. " + ex.Message);
+            }
         }
 
         private void btn_Comprar_Click(object sender, EventArgs e)
         {
-            this.cliente.Billetera = saldoInicialCliente;
+            try
+            {
+                Cliente? clienteVenta = ObtenerClienteDelListbox();
 
-            vendedor.VenderProductos(cliente, listaProductosComprados);
-            FrmGeneradorDeFactura generarFactura = new FrmGeneradorDeFactura(cliente, listaProductosComprados, this);
-            generarFactura.Show();
-            this.Hide();
+                if (clienteVenta != null && puedePagar)
+                {
+                    vendedor.VenderProductos(clienteVenta, listaProductosComprados);
+                    FrmGeneradorDeFactura generarFactura = new FrmGeneradorDeFactura(clienteVenta, listaProductosComprados, menuVendedor, this);
 
-            //Hardcodeo un vendedor y llamo al metodo VenderProductos
-            //este llamara al metodo que instaciara la fc en el sistema y se guarda tanto para
-            //el cliente como para el sistema
-            // luego instancio el form facturas llamo a la factura generada e imprimo sus datos
 
+                    ProductoBD.Modificar(heladera.ListaProducto);
+
+                    //Actualizar Heladera del Core del sistema
+                    CoreDelSistema.ActualizarListaDeProductos(heladera.ListaProducto);
+
+                    generarFactura.Show();
+                    SonidoDatosYCompraOK();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Para realizar una compra es necesario: \n- Cargar los datos de facturacion.\n- Cargar productos al changuito.\n\n Muchas Gracias! ");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al realizar la compra. " + ex.Message);
+            }
         }
         private float DevolverIvaDelProducto(float precioPorCantidad)
         {
-            float ivaDelProducto = precioPorCantidad * 21 / 100;
-
-            return ivaDelProducto;
+            try
+            {
+                float ivaDelProducto = precioPorCantidad * 21 / 100;
+                return ivaDelProducto;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al calcular el IVA del producto. " + ex.Message);
+                return 0;
+            }
         }
         private void cbb_SleccionProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Producto productoSeleccionado = (Producto)cbb_SleccionProducto.SelectedItem;
-            lbl_TotalProducto.Text = "Precio Por Kg: $        " + productoSeleccionado.PrecioPorKilo.ToString();
-            lbl_IvaProductoAgregado.Text = "IVA ProdSelec: $        " + (DevolverIvaDelProducto(productoSeleccionado.PrecioPorKilo)).ToString();
-
+            try
+            {
+                Producto productoSeleccionado = (Producto)cbb_SleccionProducto.SelectedItem;
+                lbl_TotalProducto.Text = "Precio Por Kg: $        " + productoSeleccionado.PrecioPorKilo.ToString();
+                lbl_IvaProductoAgregado.Text = "IVA ProdSelec: $        " + (DevolverIvaDelProducto(productoSeleccionado.PrecioPorKilo)).ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al seleccionar el producto. " + ex.Message);
+            }
         }
 
-        private void btn_VolverAtras_Click(object sender, EventArgs e)
+        private void btn_VolverAtras_Click_1(object sender, EventArgs e)
         {
-            if (esCLienteOVendedor == true)
+            try
             {
-                frmMenuCliente.Show();
-                this.Hide();
+                menuVendedor.Show();
+                this.Close();
+                SonidoVolverAtras();
             }
-            else if (esCLienteOVendedor == false)
+            catch (Exception ex)
             {
-                frmVentas.Show();
-                this.Hide();
+                MessageBox.Show("Se produjo un error al volver atras. " + ex.Message);
+            }
+        }
 
+        private Cliente? ObtenerClienteDelListbox()
+        {
+            try
+            {
+                if (cbb_SeleccionarCliente.SelectedIndex == -1)
+                {
+                    SonidoError();
+                    MessageBox.Show("Antes de continuar es obligatorio seleccionar un cliente");
+                    return null;
+                }
+
+                int indiceCliente = cbb_SeleccionarCliente.SelectedIndex;
+                if (indiceCliente >= 0)
+                {
+                    return cliente = ClienteSeleccionado[indiceCliente];
+                }
+                return null;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al obtener el cliente seleccionado. " + ex.Message);
+                return null;
+            }
+        }
+
+        private void cbb_SeleccionarCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ObtenerClienteDelListbox();
+                lbl_NombreCliente.Text = "Nombre: " + cliente.Nombre + " " + cliente.Apellido;
+                lbl_Cuit.Text = "CUIT: " + cliente.Cuit.ToString();
+                lbl_TipoDePago.Text = "Tipo de Pago => " + cliente.TipoDePago.ToString();
+                lbl_TopeMaximo.Text = "Tope Maximo: $" + cliente.Billetera.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error al seleccionar el cliente. " + ex.Message);
+            }
+        }
+
+        private void SonidoError()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+
+        private void SonidoAgregarAlChangitoOK()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectMarioCoinOK.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+
+        private void SonidoDatosYCompraOK()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosUP.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+        private void SonidoVolverAtras()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+
+        private void MensajeDeAlertaReponerStock()
+        {
+            MessageBox.Show("Hay faltante de productos en la heladera. \nPor favor, Reponer Stock.");
+        }
+        private void ReponerStockEnHeladera(Producto productoRecargarStock)
+        {
+            AbmHeladera abmHeladera = new AbmHeladera();
+            abmHeladera.RecargarProductoEnFormularioVendedor(productoRecargarStock);
+        }
+
+        private void btn_Agregar_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Agregar.BackColor = Color.Red;
+        }
+
+        private void btn_Agregar_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Agregar.BackColor = Color.White;
+        }
+
+        private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.Red;
+        }
+
+        private void btn_VolverAtras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.White;
+        }
+
+        private void btn_Comprar_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Comprar.BackColor = Color.Red;
+        }
+
+        private void btn_Comprar_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Comprar.BackColor = Color.White;
         }
     }
 }

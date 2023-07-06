@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using PPLabo2_2D;
 
 namespace VisualParcial1
 {
@@ -14,49 +16,112 @@ namespace VisualParcial1
     {
         AbmHeladera frmHeladera;
         FrmListadoDeFacturacion frmFacturacion;
-        FrmVentas frmVentas;
-        Login login;
+        FrmCompraVenta frmCompraVenta;
 
-        public MenuVendedor(Login login)
+
+        public MenuVendedor()
         {
             InitializeComponent();
-            this.login = login;
         }
 
         private void btn_Inventario_Click(object sender, EventArgs e)
         {
-            if (frmHeladera == null)
+            if (frmHeladera == null || frmHeladera.IsDisposed)
             {
                 frmHeladera = new AbmHeladera(this);
-                frmHeladera.Show();
-                this.Hide();
+                SonidoElegirOpcion();
             }
+            frmHeladera.Show();
+            this.Hide();
         }
 
         private void btn_Ventas_Click(object sender, EventArgs e)
         {
-            if (frmVentas == null)
+            if (frmCompraVenta == null || frmCompraVenta.IsDisposed)
             {
-                frmVentas = new FrmVentas(this);
-                frmVentas.Show();
-                this.Hide();
+                frmCompraVenta = new FrmCompraVenta(this);
+                SonidoElegirOpcion();
             }
+            frmCompraVenta.Show();
+            this.Hide();
         }
 
         private void btn_Facturacion_Click(object sender, EventArgs e)
         {
-            if (frmFacturacion == null)
+            if (frmFacturacion == null || frmFacturacion.IsDisposed)
             {
                 frmFacturacion = new FrmListadoDeFacturacion(this);
-                frmFacturacion.Show();
-                this.Hide();
+                SonidoElegirOpcion();
             }
+            frmFacturacion.Show();
+            this.Hide();
         }
 
-        private void btn_VolverAtras_Click(object sender, EventArgs e)
+
+        private void SonidoElegirOpcion()
         {
-            this.Hide();
-            login.Show();
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectMarioCoinOK.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+        private void SonidoVolverAtras()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
+            player.Play();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SonidoVolverAtras();
+            Application.Exit();
+        }
+
+        private void btn_Salir_Click(object sender, EventArgs e)
+        {
+            SonidoVolverAtras();
+            Application.Exit();
+
+        }
+
+        private void btn_Inventario_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Inventario.BackColor = Color.Red;
+        }
+
+        private void btn_Inventario_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Inventario.BackColor = Color.White;
+        }
+
+        private void btn_Facturacion_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Facturacion.BackColor = Color.Red;
+        }
+
+        private void btn_Facturacion_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Facturacion.BackColor = Color.White;
+        }
+
+        private void btn_Ventas_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Ventas.BackColor = Color.Red;
+        }
+
+        private void btn_Ventas_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Ventas.BackColor = Color.White;
+        }
+
+        private void btn_Salir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Salir.BackColor = Color.Red;
+        }
+
+        private void btn_Salir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Salir.BackColor = Color.White;
         }
     }
 }
