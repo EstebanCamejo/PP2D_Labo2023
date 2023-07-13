@@ -80,12 +80,14 @@
             dgv_ListadoDeFacturas.AllowUserToAddRows = false;
             dgv_ListadoDeFacturas.AllowUserToDeleteRows = false;
             dgv_ListadoDeFacturas.AllowUserToOrderColumns = true;
+            dgv_ListadoDeFacturas.AllowUserToResizeColumns = false;
+            dgv_ListadoDeFacturas.AllowUserToResizeRows = false;
             dgv_ListadoDeFacturas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ListadoDeFacturas.Columns.AddRange(new DataGridViewColumn[] { numeroDeFactura, fechaActual, cliente, totalFactura });
             dgv_ListadoDeFacturas.Location = new Point(47, 62);
             dgv_ListadoDeFacturas.Name = "dgv_ListadoDeFacturas";
             dgv_ListadoDeFacturas.ReadOnly = true;
-            dgv_ListadoDeFacturas.RowHeadersWidth = 62;
+            dgv_ListadoDeFacturas.RowHeadersWidth = 4;
             dgv_ListadoDeFacturas.RowTemplate.Height = 33;
             dgv_ListadoDeFacturas.Size = new Size(761, 348);
             dgv_ListadoDeFacturas.TabIndex = 3;

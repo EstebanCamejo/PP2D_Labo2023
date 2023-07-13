@@ -241,13 +241,14 @@
             dgv_ListaDeProductos.AllowUserToAddRows = false;
             dgv_ListaDeProductos.AllowUserToDeleteRows = false;
             dgv_ListaDeProductos.AllowUserToOrderColumns = true;
+            dgv_ListaDeProductos.AllowUserToResizeColumns = false;
             dgv_ListaDeProductos.AllowUserToResizeRows = false;
             dgv_ListaDeProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ListaDeProductos.Location = new Point(39, 265);
             dgv_ListaDeProductos.Margin = new Padding(4, 3, 4, 3);
             dgv_ListaDeProductos.Name = "dgv_ListaDeProductos";
             dgv_ListaDeProductos.ReadOnly = true;
-            dgv_ListaDeProductos.RowHeadersWidth = 62;
+            dgv_ListaDeProductos.RowHeadersWidth = 4;
             dgv_ListaDeProductos.RowTemplate.Height = 33;
             dgv_ListaDeProductos.Size = new Size(642, 245);
             dgv_ListaDeProductos.TabIndex = 16;

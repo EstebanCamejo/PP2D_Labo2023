@@ -31,6 +31,7 @@ namespace VisualParcial1
         Cliente cliente;
         MenuVendedor menuVendedor;
 
+
         //Creacion del Evento
         public event ReponerStockEventHandler ReponerStock;
         public FrmCompraVenta(MenuVendedor frmMenuVendedor)
@@ -45,7 +46,6 @@ namespace VisualParcial1
 
             //suscribir metodo al evento
             ReponerStock += MensajeDeAlertaReponerStock;
-
         }
 
 
@@ -63,6 +63,7 @@ namespace VisualParcial1
             dtgv_Productos.ReadOnly = true;
             heladera = vendedor.Heladera;
             ActualizarListBoxDeProductos();
+
         }
 
         /// <summary>
@@ -74,6 +75,8 @@ namespace VisualParcial1
             cbb_SleccionProducto.DisplayMember = nameof(Producto.Nombre);
             cbb_SleccionProducto.DataSource = heladera.ListaProducto;
         }
+
+
 
         /// <summary>
         /// Obtengo el indice del proiducto en la lista, con este obtengo el producto seleccionado por el cliente
@@ -87,8 +90,11 @@ namespace VisualParcial1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 if (cliente == null)
@@ -183,6 +189,10 @@ namespace VisualParcial1
                 MessageBox.Show("Se produjo un error al agregar el producto. " + ex.Message);
             }
         }
+
+
+
+
         private int ObtenerIndiceDelProductoEnHeladera()
         {
             try

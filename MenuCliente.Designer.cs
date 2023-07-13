@@ -193,16 +193,20 @@
             // 
             // dgv_Heladera
             // 
+            dgv_Heladera.AllowDrop = true;
             dgv_Heladera.AllowUserToAddRows = false;
             dgv_Heladera.AllowUserToDeleteRows = false;
+            dgv_Heladera.AllowUserToOrderColumns = true;
+            dgv_Heladera.AllowUserToResizeColumns = false;
+            dgv_Heladera.AllowUserToResizeRows = false;
             dgv_Heladera.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Heladera.Columns.AddRange(new DataGridViewColumn[] { TipoProducto, NombreProducto, PrecioPorKg, CantidadSolicitada });
-            dgv_Heladera.Location = new Point(26, 356);
+            dgv_Heladera.Location = new Point(54, 359);
             dgv_Heladera.Name = "dgv_Heladera";
             dgv_Heladera.ReadOnly = true;
-            dgv_Heladera.RowHeadersWidth = 62;
+            dgv_Heladera.RowHeadersWidth = 4;
             dgv_Heladera.RowTemplate.Height = 33;
-            dgv_Heladera.Size = new Size(809, 186);
+            dgv_Heladera.Size = new Size(758, 186);
             dgv_Heladera.TabIndex = 16;
             dgv_Heladera.CellEndEdit += dgv_Heladera_CellEndEdit;
             dgv_Heladera.CellValidating += dgv_Heladera_CellValidating;

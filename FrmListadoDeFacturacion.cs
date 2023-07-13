@@ -75,7 +75,7 @@ namespace VisualParcial1
                         dgv_ListadoDeFacturas.Rows[rowIndex].Cells["totalFactura"].Value = totalFactura.ToString("N2");
                         dgv_ListadoDeFacturas.Rows[rowIndex].Cells["totalFactura"].ReadOnly = true;
                     }
-                }               
+                }
             }
             dgv_ListadoDeFacturas.ClearSelection();
             dgv_ListadoDeFacturas.CurrentCell = null;
@@ -96,12 +96,13 @@ namespace VisualParcial1
 
         private void btn_SerializarJson_Click(object sender, EventArgs e)
         {
-            if(listadoFacturas!= null)
+            if (listadoFacturas != null)
             {
                 try
                 {
-                    Factura facturaSeralizarJson = new Factura();
-                    facturaSeralizarJson.SerializarJson(listadoFacturas);
+                    // Factura facturaSeralizarJson = new Factura();
+                    //facturaSeralizarJson.SerializarJson(listadoFacturas);
+                    CoreDelSistema.SerializarFacturasJson(listadoFacturas);
                     MessageBox.Show("La serialización en formato JSON se ha completado.");
                     facturasSerializadasJson = true;
                 }
@@ -122,10 +123,8 @@ namespace VisualParcial1
             {
                 try
                 {
-                    Factura factura = new Factura();
-                    string facturaDeserializar = factura.DeSerializarJson();
                     listaProductosForm listaProductosForm = new listaProductosForm();
-                    listaProductosForm.MostrarProductosSerializados(facturaDeserializar);
+                    listaProductosForm.MostrarFacturasSerializados();
                     listaProductosForm.ShowDialog();
                 }
                 catch (Exception ex)
@@ -141,48 +140,48 @@ namespace VisualParcial1
 
         private void btn_SerializarXml_Click(object sender, EventArgs e)
         {
-            if (listadoFacturas != null) 
-            {
-                try
-                {
-                    Factura facturaSeralizarXml = new Factura();
-                    facturaSeralizarXml.SerializarXml(listadoFacturas);
-                    MessageBox.Show("La serialización en formato XML se ha completado.");
-                    facturasSerializadasXml = true;
-                }
-                catch (Exception ex) 
-                {
-                    MessageBox.Show("Error al serializar en formato XML. " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("La lista de facturas esta vacia. No se puede realizar la serializacion en formato XML.");
-            }
+            //if (listadoFacturas != null)
+            //{
+            //    try
+            //    {
+            //        Factura facturaSeralizarXml = new Factura();
+            //        facturaSeralizarXml.SerializarXml(listadoFacturas);
+            //        MessageBox.Show("La serialización en formato XML se ha completado.");
+            //        facturasSerializadasXml = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error al serializar en formato XML. " + ex.Message);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("La lista de facturas esta vacia. No se puede realizar la serializacion en formato XML.");
+            //}
         }
 
         private void btn_DeserializarXml_Click(object sender, EventArgs e)
         {
-            if (facturasSerializadasXml)
-            {
-                try
-                {
-                    Factura factura = new Factura();
-                    string facturaDeserializar = factura.DeSerializarXml();
+            //if (facturasSerializadasXml)
+            //{
+            //    try
+            //    {
+            //        //Factura factura = new Factura();
+            //        // string facturaDeserializar = factura.DeSerializarXml();
 
-                    listaProductosForm listaProductosForm = new listaProductosForm();
-                    listaProductosForm.MostrarProductosSerializados(facturaDeserializar);
-                    listaProductosForm.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al deserializar el XML. " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Antes de deserializar Facturas en XML, \ndebes presionar el boton 'Serializar XML'\nya que pudo haber actualizaciones en la base de datos.");
-            }
+            //        listaProductosForm listaProductosForm = new listaProductosForm();
+            //        //listaProductosForm.MostrarProductosSerializados(facturaDeserializar);
+            //        listaProductosForm.ShowDialog();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error al deserializar el XML. " + ex.Message);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Antes de deserializar Facturas en XML, \ndebes presionar el boton 'Serializar XML'\nya que pudo haber actualizaciones en la base de datos.");
+            //}
         }
 
         private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
@@ -194,26 +193,5 @@ namespace VisualParcial1
         {
             btn_VolverAtras.BackColor = Color.White;
         }
-
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void button4_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void dgv_ListadoDeFacturas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }

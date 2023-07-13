@@ -121,16 +121,20 @@
             // 
             // dtgv_StockHeladera
             // 
+            dtgv_StockHeladera.AllowDrop = true;
             dtgv_StockHeladera.AllowUserToAddRows = false;
             dtgv_StockHeladera.AllowUserToDeleteRows = false;
+            dtgv_StockHeladera.AllowUserToOrderColumns = true;
+            dtgv_StockHeladera.AllowUserToResizeColumns = false;
+            dtgv_StockHeladera.AllowUserToResizeRows = false;
             dtgv_StockHeladera.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgv_StockHeladera.Columns.AddRange(new DataGridViewColumn[] { tipoDeProducto, nombre, precioPorKilo, CantidadKilos });
             dtgv_StockHeladera.Location = new Point(30, 113);
             dtgv_StockHeladera.Name = "dtgv_StockHeladera";
             dtgv_StockHeladera.ReadOnly = true;
-            dtgv_StockHeladera.RowHeadersWidth = 62;
+            dtgv_StockHeladera.RowHeadersWidth = 4;
             dtgv_StockHeladera.RowTemplate.Height = 33;
-            dtgv_StockHeladera.Size = new Size(766, 481);
+            dtgv_StockHeladera.Size = new Size(758, 481);
             dtgv_StockHeladera.TabIndex = 6;
             dtgv_StockHeladera.CellClick += dtgv_StockHeladera_CellClick;
             // 

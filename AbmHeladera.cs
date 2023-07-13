@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.Serialization;
 
 namespace VisualParcial1
 {
@@ -44,7 +45,7 @@ namespace VisualParcial1
 
             productosSerializadosJson = false;
             productosSerializadosXml = false;
-           
+
         }
 
         // EDITAR
@@ -100,7 +101,7 @@ namespace VisualParcial1
                 }
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error durante la edición del producto. " + ex.Message);
             }
@@ -115,7 +116,7 @@ namespace VisualParcial1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_nuevoProducto_Click(object sender, EventArgs e)
-        {               
+        {
             try
             {
                 FrmAltaProducto frmAltaProducto = new FrmAltaProducto(this);
@@ -146,7 +147,7 @@ namespace VisualParcial1
                     }
                     catch (falloGuardarProductoException ex)
                     {
-                        MessageBox.Show("EL producto no se guardo en la base de datos." + ex.Message);                        
+                        MessageBox.Show("EL producto no se guardo en la base de datos." + ex.Message);
                     }
                 }
                 else if (resltado == DialogResult.No)
@@ -206,7 +207,7 @@ namespace VisualParcial1
         /// </summary>
         /// <returns></returns>
         private Producto? ObtenerProductoDelDataGrid()
-        {            
+        {
             try
             {
                 if (indiceSeleccionado >= 0 && indiceSeleccionado < heladera.ListaProducto.Count)
@@ -259,7 +260,7 @@ namespace VisualParcial1
                 dtgv_StockHeladera.CurrentCell = null;
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error al actualizar el DataGrid. " + ex.Message);
             }
@@ -303,9 +304,8 @@ namespace VisualParcial1
         {
             try
             {
-                Producto productoSeralizarJson = new Producto();
                 List<Producto> listaProductos = heladera.ListaProducto = ProductoBD.Leer();
-                productoSeralizarJson.SerializarJson(listaProductos);
+                CoreDelSistema.SerializarProductosJson(listaProductos);
                 MessageBox.Show("La serialización en formato JSON se ha completado.");
 
                 // Habilitar los botones de deserializacion
@@ -316,6 +316,7 @@ namespace VisualParcial1
             {
                 MessageBox.Show("Se produjo un error durante la serialización en formato JSON. " + ex.Message);
             }
+
         }
 
         private void btn_DeSerializarJson_Click(object sender, EventArgs e)
@@ -324,10 +325,8 @@ namespace VisualParcial1
             {
                 if (productosSerializadosJson)
                 {
-                    Producto producto = new Producto();
-                    string productoDeserializar = producto.DeSerializarJson();
                     listaProductosForm listaProductosForm = new listaProductosForm();
-                    listaProductosForm.MostrarProductosSerializados(productoDeserializar);
+                    listaProductosForm.MostrarProductosSerializadosJson();
                     listaProductosForm.ShowDialog();
                 }
                 else
@@ -335,7 +334,7 @@ namespace VisualParcial1
                     MessageBox.Show("Antes de deserializar los productos en JSON, \ndebes presionar el boton 'Serializar Json' \nya que pudo haber actualizaciones en la base de datos.");
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error durante la deserializacion en formato JSON. " + ex.Message);
             }
@@ -346,9 +345,8 @@ namespace VisualParcial1
         {
             try
             {
-                Producto productoSeralizarXml = new Producto();
                 List<Producto> listaProductos = heladera.ListaProducto = ProductoBD.Leer();
-                productoSeralizarXml.SerializarXml(listaProductos);
+                CoreDelSistema.SerializarProductosXml(listaProductos);
                 MessageBox.Show("La serialización en formato XML se ha completado.");
 
                 // Habilitar los botones de deserializacion
@@ -367,11 +365,8 @@ namespace VisualParcial1
             {
                 if (productosSerializadosXml)
                 {
-                    Producto producto = new Producto();
-                    string productoDeserializar = producto.DeSerializarXml();
-
                     listaProductosForm listaProductosForm = new listaProductosForm();
-                    listaProductosForm.MostrarProductosSerializados(productoDeserializar);
+                    listaProductosForm.MostrarProductosSerializadosXml();
                     listaProductosForm.ShowDialog();
                 }
                 else

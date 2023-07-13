@@ -45,9 +45,10 @@ namespace VisualParcial1
 
                     return;
                 }
-               
-                ObtenerUsuarioYContraseniaDelegate obtenerUsuarioYContrasenia = ObtenerUsuarioYContraseniaAleatorio;
-                (string usuario, string contrasenia) = obtenerUsuarioYContrasenia();
+
+                //ObtenerUsuarioYContraseniaDelegate obtenerUsuarioYContrasenia = ObtenerUsuarioYContraseniaAleatorio;
+                //(string usuario, string contrasenia) = obtenerUsuarioYContrasenia();
+                (string usuario, string contrasenia) = ObtenerUsuarioYContraseniaAleatorio();
 
                 Cliente clienteLogueado = (Cliente)UsuariosDB.LoginTipoDeUsuario(usuario, contrasenia);
 
@@ -72,11 +73,11 @@ namespace VisualParcial1
             }
             catch (Exception ex) 
             {
-                MessageBox.Show("Error al iniciar sesión. " + ex.Message); 
+                MessageBox.Show("Error al iniciar sesión LALALA. " + ex.Message); 
             }
         }
 
-        public delegate (string, string) ObtenerUsuarioYContraseniaDelegate();
+       // public delegate (string, string) ObtenerUsuarioYContraseniaDelegate();
 
         public static (string, string) ObtenerUsuarioYContraseniaAleatorio()
         {

@@ -134,6 +134,7 @@
             // 
             // cbb_TipoDeProducto
             // 
+            cbb_TipoDeProducto.DropDownStyle = ComboBoxStyle.DropDownList;
             cbb_TipoDeProducto.FormattingEnabled = true;
             cbb_TipoDeProducto.Location = new Point(297, 20);
             cbb_TipoDeProducto.Margin = new Padding(4, 3, 4, 3);

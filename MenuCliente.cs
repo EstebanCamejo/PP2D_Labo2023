@@ -32,6 +32,10 @@ namespace VisualParcial1
         private bool showImagen1;
         private bool showImagen2;
         private bool showImagen3;
+
+        //Delegado por cancelacion
+        private ActualizarProductoCanceladoDelegate resetearProductoPorCancelacionDelegate;
+
         public MenuCliente()
         {
             InitializeComponent();
@@ -43,6 +47,12 @@ namespace VisualParcial1
             showImagen1 = false;
             showImagen2 = false;
             showImagen3 = false;
+
+            //suscribir metodo al evento
+            auxProducto = new Producto();
+
+            resetearProductoPorCancelacionDelegate += auxProducto.SetearCantidadSolicitada;
+            resetearProductoPorCancelacionDelegate += auxProducto.SetearPrecioPorCantidadSolicitada;
         }
 
         public MenuCliente(Cliente clienteLogueado) : this()
@@ -51,12 +61,11 @@ namespace VisualParcial1
         }
 
         private void MenuCliente_Load(object sender, EventArgs e)
-        {           
+        {
             heladera.HeladeraCargada();
             CargarHeladeraAlDataGrid(heladera);
             CargarClienteAlDataGrid();
             BloquearTextBoxes();
-
             IniciarCambioPublicidad();
         }
 
@@ -278,9 +287,11 @@ namespace VisualParcial1
             dgv_Heladera.CurrentCell = null;
         }
 
+
+        //Declaro mi delegado por cancelacion de compra.
+        public delegate void ActualizarProductoCanceladoDelegate(float cantidadSolicitada);
         private void dgv_Heladera_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
             try
             {
                 if (nuevoCliente == null)
@@ -348,7 +359,7 @@ namespace VisualParcial1
                         if (cantidadSolicitada >= 1)
                         {
                             productoAgregado.SetearCantidadSolicitada(cantidadSolicitada);
-                        //Comprobamos disponibilidad sobre la cantidad del producto
+                            //Comprobamos disponibilidad sobre la cantidad del producto
 
                             try
                             {
@@ -392,6 +403,8 @@ namespace VisualParcial1
                                     }
                                     else
                                     {
+                                        //****resetear producto****
+                                        resetearProductoPorCancelacionDelegate?.Invoke(0);
                                         SonidoError();
                                         MessageBox.Show("Su saldo disponible no es suficiente para efectuar la compra.");
                                         dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío                                
@@ -399,6 +412,8 @@ namespace VisualParcial1
                                 }
                                 else
                                 {
+                                    //****Resetear por no cumplir con la demanda solicitada****
+                                    resetearProductoPorCancelacionDelegate?.Invoke(0);
                                     SonidoError();
                                     MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
                                     dgv_Heladera.Rows[e.RowIndex].Cells[columnIndexCantidadSolicitada].Value = ""; // Valor vacío                            
@@ -408,17 +423,22 @@ namespace VisualParcial1
                             catch (Exception ex)
                             {
                                 MessageBox.Show("Error al comprobar la disponibilidad del producto. " + ex.Message);
+
+                                // ****invocar por cualquier error al ejecutar la disponibilidad****
+                                resetearProductoPorCancelacionDelegate?.Invoke(0);
+
                             }
 
                         }
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo una excepción al editar la celda del DataGridView. " + ex.Message);
             }
         }
+
 
         private int ObtenerIdProducto(string? tipoProducto)
         {
@@ -503,7 +523,7 @@ namespace VisualParcial1
                     MessageBox.Show("Por favor, presione el boton REGISTRO DE DATOS.");
                     return;
                 }
-                if(!puedePagar || !datosCargados)
+                if (!puedePagar || !datosCargados)
                 {
                     MessageBox.Show("Para continuar con su compra \npor favor seleccione algun producto.");
                     return;
@@ -523,7 +543,7 @@ namespace VisualParcial1
                     this.Hide();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 // Manejo de excepciones inesperadas
                 SonidoError();
@@ -547,7 +567,6 @@ namespace VisualParcial1
 
                 dgv_Heladera.CurrentCell = null;
 
-                // dgv_Heladera.Columns["CantidadSolicitada"].ReadOnly = false;
                 dgv_Heladera.ReadOnly = false;
             }
             else
@@ -560,8 +579,6 @@ namespace VisualParcial1
 
                 dgv_Heladera.EnableHeadersVisualStyles = true;
 
-                //DataGridView1.CurrentCell = null;
-                //dgv_Heladera.Columns["CantidadSolicitada"].ReadOnly = true;
                 dgv_Heladera.ReadOnly = false;
             }
 
@@ -641,7 +658,7 @@ namespace VisualParcial1
                 foreach (Producto p in listaProductosComprados)
                 {
                     if (p.Nombre == productoAgregado.Nombre)
-                    {                       
+                    {
                         float precioPorCantidad = ObtenerPrecioPorCantidad(p.CantidadSolicitada, productoAgregado.PrecioPorKilo);
                         float ivaDelProductoAgregado = DevolverIvaDelProducto(precioPorCantidad);
                         bool esDevolucion = true;
@@ -676,13 +693,6 @@ namespace VisualParcial1
             btn_RegistroDeDatos.BackColor = Color.White;
         }
 
-        //private void pictureBox_Publicidad2_Click(object sender, EventArgs e)
-        //{
 
-        //}
-
-        //private void pictureBox_Publicidad1_Click(object sender, EventArgs e)
-        //{
-        //}
     }
 }

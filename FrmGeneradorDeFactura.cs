@@ -217,7 +217,7 @@ namespace VisualParcial1
 
         private void btn_Atras_MouseLeave(object sender, EventArgs e)
         {
-            btn_Atras.BackColor= Color.White;
+            btn_Atras.BackColor = Color.White;
         }
     }
 

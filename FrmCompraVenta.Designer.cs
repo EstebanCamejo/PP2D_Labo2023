@@ -77,18 +77,21 @@
             // 
             // dtgv_Productos
             // 
+            dtgv_Productos.AllowDrop = true;
             dtgv_Productos.AllowUserToAddRows = false;
             dtgv_Productos.AllowUserToDeleteRows = false;
             dtgv_Productos.AllowUserToOrderColumns = true;
+            dtgv_Productos.AllowUserToResizeColumns = false;
+            dtgv_Productos.AllowUserToResizeRows = false;
             dtgv_Productos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgv_Productos.Columns.AddRange(new DataGridViewColumn[] { Nombre, cantidadDeKilos, PrecioPorKg, Cantidad, Importe });
-            dtgv_Productos.Location = new Point(59, 363);
+            dtgv_Productos.Location = new Point(72, 366);
             dtgv_Productos.Margin = new Padding(4, 3, 4, 3);
             dtgv_Productos.Name = "dtgv_Productos";
             dtgv_Productos.ReadOnly = true;
-            dtgv_Productos.RowHeadersWidth = 62;
+            dtgv_Productos.RowHeadersWidth = 5;
             dtgv_Productos.RowTemplate.Height = 33;
-            dtgv_Productos.Size = new Size(933, 280);
+            dtgv_Productos.Size = new Size(908, 280);
             dtgv_Productos.TabIndex = 1;
             // 
             // Nombre

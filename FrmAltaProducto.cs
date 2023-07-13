@@ -72,7 +72,7 @@ namespace VisualParcial1
                     txb_Cantidad.Text = productoAlta.CantidadDeKilos.ToString();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error durante la carga del formulario. " + ex.Message);
             }
@@ -152,7 +152,7 @@ namespace VisualParcial1
                 }
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error durante la creacion del producto. " + ex.Message);
             }
@@ -182,14 +182,14 @@ namespace VisualParcial1
 
         private void FrmAltaProducto_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try 
+            try
             {
                 if (!cerrarFormulario)
                 {
                     e.Cancel = true; // Cancelar el cierre del formulario
-                }            
+                }
             }
-             catch (Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error durante el cierre del formulario. " + ex.Message);
             }
