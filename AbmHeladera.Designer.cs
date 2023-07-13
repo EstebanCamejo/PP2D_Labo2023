@@ -58,6 +58,8 @@
             btn_editarProducto.Text = "Editar";
             btn_editarProducto.UseVisualStyleBackColor = true;
             btn_editarProducto.Click += btn_editarProducto_Click;
+            btn_editarProducto.MouseEnter += btn_editarProducto_MouseEnter;
+            btn_editarProducto.MouseLeave += btn_editarProducto_MouseLeave;
             // 
             // btn_nuevoProducto
             // 
@@ -70,6 +72,8 @@
             btn_nuevoProducto.Text = "Nuevo";
             btn_nuevoProducto.UseVisualStyleBackColor = true;
             btn_nuevoProducto.Click += btn_nuevoProducto_Click;
+            btn_nuevoProducto.MouseEnter += btn_nuevoProducto_MouseEnter;
+            btn_nuevoProducto.MouseLeave += btn_nuevoProducto_MouseLeave;
             // 
             // label1
             // 
@@ -94,6 +98,8 @@
             btn_bajaProducto.Text = "Baja";
             btn_bajaProducto.UseVisualStyleBackColor = true;
             btn_bajaProducto.Click += btn_bajaProducto_Click;
+            btn_bajaProducto.MouseEnter += btn_bajaProducto_MouseEnter;
+            btn_bajaProducto.MouseLeave += btn_bajaProducto_MouseLeave;
             // 
             // btn_VolverAtras
             // 
@@ -106,16 +112,25 @@
             btn_VolverAtras.Text = "Atras";
             btn_VolverAtras.UseVisualStyleBackColor = true;
             btn_VolverAtras.Click += btn_VolverAtras_Click;
+            btn_VolverAtras.MouseEnter += btn_VolverAtras_MouseEnter;
+            btn_VolverAtras.MouseLeave += btn_VolverAtras_MouseLeave;
             // 
             // dtgv_StockHeladera
             // 
+            dtgv_StockHeladera.AllowDrop = true;
+            dtgv_StockHeladera.AllowUserToAddRows = false;
+            dtgv_StockHeladera.AllowUserToDeleteRows = false;
+            dtgv_StockHeladera.AllowUserToOrderColumns = true;
+            dtgv_StockHeladera.AllowUserToResizeColumns = false;
+            dtgv_StockHeladera.AllowUserToResizeRows = false;
             dtgv_StockHeladera.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgv_StockHeladera.Columns.AddRange(new DataGridViewColumn[] { tipoDeProducto, nombre, precioPorKilo, CantidadKilos });
             dtgv_StockHeladera.Location = new Point(30, 91);
             dtgv_StockHeladera.Name = "dtgv_StockHeladera";
-            dtgv_StockHeladera.RowHeadersWidth = 62;
+            dtgv_StockHeladera.ReadOnly = true;
+            dtgv_StockHeladera.RowHeadersWidth = 4;
             dtgv_StockHeladera.RowTemplate.Height = 33;
-            dtgv_StockHeladera.Size = new Size(763, 481);
+            dtgv_StockHeladera.Size = new Size(753, 481);
             dtgv_StockHeladera.TabIndex = 6;
             dtgv_StockHeladera.CellClick += dtgv_StockHeladera_CellClick;
             // 
@@ -124,6 +139,7 @@
             tipoDeProducto.HeaderText = "Tipo Prod";
             tipoDeProducto.MinimumWidth = 8;
             tipoDeProducto.Name = "tipoDeProducto";
+            tipoDeProducto.ReadOnly = true;
             tipoDeProducto.Width = 150;
             // 
             // nombre
@@ -131,6 +147,7 @@
             nombre.HeaderText = "Nombre";
             nombre.MinimumWidth = 8;
             nombre.Name = "nombre";
+            nombre.ReadOnly = true;
             nombre.Width = 300;
             // 
             // precioPorKilo
@@ -138,6 +155,7 @@
             precioPorKilo.HeaderText = "Precio Kg";
             precioPorKilo.MinimumWidth = 8;
             precioPorKilo.Name = "precioPorKilo";
+            precioPorKilo.ReadOnly = true;
             precioPorKilo.Width = 150;
             // 
             // CantidadKilos
@@ -145,6 +163,7 @@
             CantidadKilos.HeaderText = "Stock";
             CantidadKilos.MinimumWidth = 8;
             CantidadKilos.Name = "CantidadKilos";
+            CantidadKilos.ReadOnly = true;
             CantidadKilos.Width = 150;
             // 
             // pictureBox1

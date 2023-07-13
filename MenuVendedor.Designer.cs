@@ -39,6 +39,7 @@
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
             label1 = new Label();
+            btn_Salir = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -71,6 +72,8 @@
             btn_Inventario.Text = "Inventario ";
             btn_Inventario.UseVisualStyleBackColor = false;
             btn_Inventario.Click += btn_Inventario_Click;
+            btn_Inventario.MouseEnter += btn_Inventario_MouseEnter;
+            btn_Inventario.MouseLeave += btn_Inventario_MouseLeave;
             // 
             // btn_Ventas
             // 
@@ -84,6 +87,8 @@
             btn_Ventas.Text = "   Ventas y Pedidos";
             btn_Ventas.UseVisualStyleBackColor = false;
             btn_Ventas.Click += btn_Ventas_Click;
+            btn_Ventas.MouseEnter += btn_Ventas_MouseEnter;
+            btn_Ventas.MouseLeave += btn_Ventas_MouseLeave;
             // 
             // btn_Facturacion
             // 
@@ -97,6 +102,8 @@
             btn_Facturacion.Text = "   Facturacion";
             btn_Facturacion.UseVisualStyleBackColor = false;
             btn_Facturacion.Click += btn_Facturacion_Click;
+            btn_Facturacion.MouseEnter += btn_Facturacion_MouseEnter;
+            btn_Facturacion.MouseLeave += btn_Facturacion_MouseLeave;
             // 
             // pictureBox1
             // 
@@ -156,12 +163,26 @@
             label1.TabIndex = 10;
             label1.Text = "FM Carnes SRL";
             // 
+            // btn_Salir
+            // 
+            btn_Salir.Font = new Font("Lucida Fax", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Salir.Location = new Point(296, 426);
+            btn_Salir.Name = "btn_Salir";
+            btn_Salir.Size = new Size(112, 34);
+            btn_Salir.TabIndex = 11;
+            btn_Salir.Text = "Salir";
+            btn_Salir.UseVisualStyleBackColor = true;
+            btn_Salir.Click += button1_Click;
+            btn_Salir.MouseEnter += btn_Salir_MouseEnter;
+            btn_Salir.MouseLeave += btn_Salir_MouseLeave;
+            // 
             // MenuVendedor
             // 
             AutoScaleDimensions = new SizeF(12F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(721, 524);
+            Controls.Add(btn_Salir);
             Controls.Add(label1);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);
@@ -199,5 +220,6 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private Label label1;
+        private Button btn_Salir;
     }
 }

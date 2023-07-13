@@ -54,9 +54,11 @@
             btn_CrearProducto.Name = "btn_CrearProducto";
             btn_CrearProducto.Size = new Size(164, 43);
             btn_CrearProducto.TabIndex = 0;
-            btn_CrearProducto.Text = "Crear";
+            btn_CrearProducto.Text = "Guardar";
             btn_CrearProducto.UseVisualStyleBackColor = true;
             btn_CrearProducto.Click += btn_CrearProducto_Click;
+            btn_CrearProducto.MouseEnter += btn_CrearProducto_MouseEnter;
+            btn_CrearProducto.MouseLeave += btn_CrearProducto_MouseLeave;
             // 
             // lbl_TipoDeProducto
             // 
@@ -132,6 +134,7 @@
             // 
             // cbb_TipoDeProducto
             // 
+            cbb_TipoDeProducto.DropDownStyle = ComboBoxStyle.DropDownList;
             cbb_TipoDeProducto.FormattingEnabled = true;
             cbb_TipoDeProducto.Location = new Point(297, 20);
             cbb_TipoDeProducto.Margin = new Padding(4, 3, 4, 3);
@@ -150,6 +153,8 @@
             btn_VolverAtras.Text = "Atras";
             btn_VolverAtras.UseVisualStyleBackColor = true;
             btn_VolverAtras.Click += btn_VolverAtras_Click;
+            btn_VolverAtras.MouseEnter += btn_VolverAtras_MouseEnter;
+            btn_VolverAtras.MouseLeave += btn_VolverAtras_MouseLeave;
             // 
             // pictureBox1
             // 
@@ -204,6 +209,7 @@
             Name = "FrmAltaProducto";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Producto Alta/Modificar";
+            FormClosing += FrmAltaProducto_FormClosing;
             Load += FrmAltaProducto_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

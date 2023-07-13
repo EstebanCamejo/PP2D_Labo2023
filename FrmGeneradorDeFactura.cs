@@ -17,24 +17,26 @@ namespace VisualParcial1
         Cliente clienteAFacturar;
         List<Producto> productosAFacturar;
         Factura facturaGenerada;
-
         MenuCliente menuCliente;
+        MenuVendedor frmMenuVendedor;
         FrmCompraVenta frmCompraVenta;
         public FrmGeneradorDeFactura()
         {
             InitializeComponent();
-
         }
         public FrmGeneradorDeFactura(Cliente cliente, List<Producto> productos, MenuCliente menuCliente) : this()
         {
             this.clienteAFacturar = cliente;
             this.productosAFacturar = productos;
             this.menuCliente = menuCliente;
+            btn_Atras.Text = "Salir";
         }
-        public FrmGeneradorDeFactura(Cliente cliente, List<Producto> productos, FrmCompraVenta frmCompraVenta) : this()
+        public FrmGeneradorDeFactura(Cliente cliente, List<Producto> productos, MenuVendedor frmMenuVendedor, FrmCompraVenta frmCompraVenta) : this()
         {
             this.clienteAFacturar = cliente;
             this.productosAFacturar = productos;
+            this.frmMenuVendedor = frmMenuVendedor;
+            btn_Atras.Text = "Atras";
             this.frmCompraVenta = frmCompraVenta;
         }
 
@@ -95,19 +97,18 @@ namespace VisualParcial1
 
 
         }
-
         private void btn_Atras_Click(object sender, EventArgs e)
         {
             if (menuCliente != null)
             {
-                this.Hide();
-                menuCliente.Show();
                 SonidoVolverAtras();
+                Application.Exit();
             }
-            else if (frmCompraVenta != null)
+            else if (frmMenuVendedor != null)
             {
-                this.Hide();
-                frmCompraVenta.Show();
+                this.Close();
+                frmCompraVenta.Close();
+                frmMenuVendedor.Show();
                 SonidoVolverAtras();
             }
             return;
@@ -118,6 +119,16 @@ namespace VisualParcial1
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
             player.Play();
+        }
+
+        private void btn_Atras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Atras.BackColor = Color.Red;
+        }
+
+        private void btn_Atras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Atras.BackColor = Color.White;
         }
     }
 }

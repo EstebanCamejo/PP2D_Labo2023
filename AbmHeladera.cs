@@ -26,7 +26,7 @@ namespace VisualParcial1
         }
         public AbmHeladera(MenuVendedor frmMenuVendedor) : this()
         {
-            
+
             heladera = new Heladera();
             auxProducto = new Producto();
             primeraCarga = true;
@@ -35,7 +35,7 @@ namespace VisualParcial1
             dtgv_StockHeladera.CellClick += dtgv_StockHeladera_CellClick;
         }
         private void AbmHeladera_Load(object sender, EventArgs e)
-        {          
+        {
             heladera.ActualizarProductosDeLaHeladera(CoreDelSistema.Productos);
 
             ActualizarDataGrid(heladera);
@@ -71,14 +71,17 @@ namespace VisualParcial1
                     ActualizarDataGrid(heladera);
                     MessageBox.Show($"El producto {productoCopia.Nombre}se ha actualizado correctamente.");
                     SonidoAbmOK();
+                    ActualizarDataGrid(heladera);
                 }
-                else
+                else if (resltado == DialogResult.No)
                 {
                     MessageBox.Show("El producto no ha sido actualizado");
                     SonidoError();
                 }
-
-                ActualizarDataGrid(heladera);
+            }
+            else
+            {
+                MessageBox.Show("Para continuar con la edición \ndebe seleccionar un producto.");
             }
         }
 
@@ -104,7 +107,7 @@ namespace VisualParcial1
                 MessageBox.Show($"El producto {frmAltaProducto.ProductoAlta.Nombre} ha sido creado exitosamente");
                 SonidoAbmOK();
             }
-            else
+            else if (resltado == DialogResult.No)
             {
                 MessageBox.Show("El producto no se ha creado");
                 SonidoError();
@@ -134,6 +137,10 @@ namespace VisualParcial1
 
                 SonidoAbmOK();
             }
+            else
+            {
+                MessageBox.Show("Para continuar con la baja \ndebe seleccionar un producto.");
+            }
 
         }
 
@@ -152,7 +159,7 @@ namespace VisualParcial1
 
         private void btn_VolverAtras_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             frmMenuVendedor.Show();
             SonidoVolverAtras();
         }
@@ -177,6 +184,8 @@ namespace VisualParcial1
                 dtgv_StockHeladera.Rows[rowIndex].Cells["nombre"].Value = producto.Nombre;
                 dtgv_StockHeladera.Rows[rowIndex].Cells["nombre"].ReadOnly = true;
             }
+            dtgv_StockHeladera.ClearSelection();
+            dtgv_StockHeladera.CurrentCell = null;
         }
 
         private void dtgv_StockHeladera_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -204,6 +213,46 @@ namespace VisualParcial1
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
             player.Play();
+        }
+
+        private void btn_nuevoProducto_MouseEnter(object sender, EventArgs e)
+        {
+            btn_nuevoProducto.BackColor = Color.Red;
+        }
+
+        private void btn_nuevoProducto_MouseLeave(object sender, EventArgs e)
+        {
+            btn_nuevoProducto.BackColor = Color.White;
+        }
+
+        private void btn_editarProducto_MouseEnter(object sender, EventArgs e)
+        {
+            btn_editarProducto.BackColor = Color.Red;
+        }
+
+        private void btn_editarProducto_MouseLeave(object sender, EventArgs e)
+        {
+            btn_editarProducto.BackColor = Color.White;
+        }
+
+        private void btn_bajaProducto_MouseEnter(object sender, EventArgs e)
+        {
+            btn_bajaProducto.BackColor = Color.Red;
+        }
+
+        private void btn_bajaProducto_MouseLeave(object sender, EventArgs e)
+        {
+            btn_bajaProducto.BackColor = Color.White;
+        }
+
+        private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.Red;
+        }
+
+        private void btn_VolverAtras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.White;
         }
     }
 }

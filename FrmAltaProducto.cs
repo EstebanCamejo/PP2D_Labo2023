@@ -17,7 +17,7 @@ namespace VisualParcial1
     public partial class FrmAltaProducto : Form
     {
         Producto productoAlta;
-        EProdcuto tipoProductoEnum;        
+        EProdcuto tipoProductoEnum;
         string precioPorKilo;
         string cantidadDeKilos;
         string nombre;
@@ -25,10 +25,12 @@ namespace VisualParcial1
         public float valorPrecioPorKg;
         public float valorCantidadKg;
         private AbmHeladera frmAbmHladera;
+        private bool cerrarFormulario;
         public FrmAltaProducto()
         {
             InitializeComponent();
             this.esModificar = false;
+            this.cerrarFormulario = false;
         }
         public FrmAltaProducto(AbmHeladera frmAbmHladera) : this()
         {
@@ -79,15 +81,16 @@ namespace VisualParcial1
         /// <param name="e"></param>
         private void btn_CrearProducto_Click(object sender, EventArgs e)
         {
-
             nombre = txb_Nombre.Text;
             precioPorKilo = txb_Precio.Text;
             cantidadDeKilos = txb_Cantidad.Text;
+            bool datosOK = true;
 
             if (string.IsNullOrWhiteSpace(cbb_TipoDeProducto.Text))
             {
                 MessageBox.Show("El tipo de Producto Selecionado es Invalido");
                 SonidoError();
+                datosOK = false;
             }
             else
             {
@@ -98,41 +101,55 @@ namespace VisualParcial1
             {
                 MessageBox.Show("El nombre Ingresado es Invalido");
                 SonidoError();
+                datosOK = false;
+                txb_Nombre.Text = "";
             }
 
-            if (!float.TryParse(precioPorKilo, out valorPrecioPorKg) && valorPrecioPorKg <= 0)
+            if ((!float.TryParse(precioPorKilo, out valorPrecioPorKg)) || valorPrecioPorKg <= 0)
             {
                 MessageBox.Show("El precio ingresado es invalido");
                 SonidoError();
+                datosOK = false;
+                txb_Precio.Text = "";
             }
-            if (!float.TryParse(cantidadDeKilos, out valorCantidadKg) && valorCantidadKg < 0)
+            if ((!float.TryParse(cantidadDeKilos, out valorCantidadKg)) || valorCantidadKg < 0)
             {
-                MessageBox.Show("El precio ingresado es invalido");
+                MessageBox.Show("La cantidad ingresada es invalida");
                 SonidoError();
+                datosOK = false;
+                txb_Cantidad.Text = "";
             }
 
-
-            if (esModificar == true)
+            if (datosOK == false)
             {
-                this.productoAlta.TipoDeProducto = tipoProductoEnum;
-                this.productoAlta.Nombre = nombre;
-                this.productoAlta.PrecioPorKilo = valorPrecioPorKg;
-                this.productoAlta.CantidadDeKilos = valorCantidadKg;
+                this.DialogResult = DialogResult.No;
             }
             else
             {
-                Producto nuevoProducto = new Producto(tipoProductoEnum, valorPrecioPorKg, valorCantidadKg, nombre);
+                if (esModificar == true)
+                {
+                    this.productoAlta.TipoDeProducto = tipoProductoEnum;
+                    this.productoAlta.Nombre = nombre;
+                    this.productoAlta.PrecioPorKilo = valorPrecioPorKg;
+                    this.productoAlta.CantidadDeKilos = valorCantidadKg;
+                }
+                else
+                {
+                    Producto nuevoProducto = new Producto(tipoProductoEnum, valorPrecioPorKg, valorCantidadKg, nombre);
 
-                this.productoAlta = nuevoProducto;
+                    this.productoAlta = nuevoProducto;
+                }
+
+                this.DialogResult = DialogResult.OK;
+                cerrarFormulario = true; // El formulario puede cerrarse
+                this.Close(); // Cerrar el formulario
             }
-
-            this.DialogResult = DialogResult.OK;
-
         }
 
         private void btn_VolverAtras_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            cerrarFormulario = true;
+            this.Close();
             frmAbmHladera.Show();
             SonidoVolverAtras();
         }
@@ -143,12 +160,40 @@ namespace VisualParcial1
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectERROR.wav"; ; // Ruta del archivo de sonido
             player.Play();
         }
-              
+
         private void SonidoVolverAtras()
         {
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
             player.Play();
+        }
+
+        private void FrmAltaProducto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!cerrarFormulario)
+            {
+                e.Cancel = true; // Cancelar el cierre del formulario
+            }
+        }
+
+        private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.Red;
+        }
+
+        private void btn_VolverAtras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.White;
+        }
+
+        private void btn_CrearProducto_MouseEnter(object sender, EventArgs e)
+        {
+            btn_CrearProducto.BackColor = Color.Red;
+        }
+
+        private void btn_CrearProducto_MouseLeave(object sender, EventArgs e)
+        {
+            btn_CrearProducto.BackColor = Color.White;
         }
     }
 }

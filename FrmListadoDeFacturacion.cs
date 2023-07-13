@@ -28,7 +28,7 @@ namespace VisualParcial1
 
 
         private void FrmListadoDeFacturacion_Load(object sender, EventArgs e)
-        {            
+        {
             ActualizarFacturasDelDatagrid(listadoFacturas);
         }
 
@@ -44,7 +44,7 @@ namespace VisualParcial1
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["numeroDeFactura"].Value = factura.NumeroDeFactura.ToString();
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["numeroDeFactura"].ReadOnly = true;
 
-                dgv_ListadoDeFacturas.Rows[rowIndex].Cells["fechaActual"].Value = factura.FechaActual.ToShortDateString;
+                dgv_ListadoDeFacturas.Rows[rowIndex].Cells["fechaActual"].Value = factura.FechaActual.ToShortDateString();
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["fechaActual"].ReadOnly = true;
 
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["cliente"].Value = factura.Apellido;
@@ -53,11 +53,13 @@ namespace VisualParcial1
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["totalFactura"].Value = factura.TotalFactura.ToString("N2");
                 dgv_ListadoDeFacturas.Rows[rowIndex].Cells["totalFactura"].ReadOnly = true;
             }
+            dgv_ListadoDeFacturas.ClearSelection();
+            dgv_ListadoDeFacturas.CurrentCell = null;
         }
 
         private void btn_VolverAtras_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             frmMenuVendedor.Show();
             SonidoVolverAtras();
         }
@@ -66,6 +68,16 @@ namespace VisualParcial1
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
             player.Play();
+        }
+
+        private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.Red;
+        }
+
+        private void btn_VolverAtras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.White;
         }
     }
 }

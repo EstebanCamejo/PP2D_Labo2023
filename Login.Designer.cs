@@ -86,6 +86,8 @@
             btn_Cliente.Text = "Cliente";
             btn_Cliente.UseVisualStyleBackColor = true;
             btn_Cliente.Click += btn_Cliente_Click;
+            btn_Cliente.MouseEnter += btn_Cliente_MouseEnter;
+            btn_Cliente.MouseLeave += btn_Cliente_MouseLeave;
             // 
             // btn_Vendedor
             // 
@@ -97,6 +99,8 @@
             btn_Vendedor.Text = "Vendedor";
             btn_Vendedor.UseVisualStyleBackColor = true;
             btn_Vendedor.Click += btn_Vendedor_Click;
+            btn_Vendedor.MouseEnter += btn_Vendedor_MouseEnter;
+            btn_Vendedor.MouseLeave += btn_Vendedor_MouseLeave;
             // 
             // pictureBox1
             // 

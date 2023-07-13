@@ -45,7 +45,6 @@
             TipoProducto = new DataGridViewTextBoxColumn();
             NombreProducto = new DataGridViewTextBoxColumn();
             PrecioPorKg = new DataGridViewTextBoxColumn();
-            CantidadKgDisponibles = new DataGridViewTextBoxColumn();
             CantidadSolicitada = new DataGridViewTextBoxColumn();
             lbl_SaldoDisponible = new Label();
             lbl_TotalApagar = new Label();
@@ -63,7 +62,7 @@
             // 
             lbl_LeyendaMCliente.AutoSize = true;
             lbl_LeyendaMCliente.Font = new Font("Lucida Sans", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_LeyendaMCliente.ForeColor = SystemColors.MenuBar;
+            lbl_LeyendaMCliente.ForeColor = Color.Lime;
             lbl_LeyendaMCliente.Location = new Point(48, 164);
             lbl_LeyendaMCliente.Margin = new Padding(4, 0, 4, 0);
             lbl_LeyendaMCliente.Name = "lbl_LeyendaMCliente";
@@ -174,9 +173,12 @@
             btn_RegistroDeDatos.Text = "Registro de Datos";
             btn_RegistroDeDatos.UseVisualStyleBackColor = true;
             btn_RegistroDeDatos.Click += btn_RegistroDeDatos_Click;
+            btn_RegistroDeDatos.MouseEnter += btn_RegistroDeDatos_MouseEnter;
+            btn_RegistroDeDatos.MouseLeave += btn_RegistroDeDatos_MouseLeave;
             // 
             // cbb_MedioDePago
             // 
+            cbb_MedioDePago.DropDownStyle = ComboBoxStyle.DropDownList;
             cbb_MedioDePago.FormattingEnabled = true;
             cbb_MedioDePago.Location = new Point(625, 266);
             cbb_MedioDePago.Margin = new Padding(4, 3, 4, 3);
@@ -186,21 +188,30 @@
             // 
             // dgv_Heladera
             // 
+            dgv_Heladera.AllowDrop = true;
+            dgv_Heladera.AllowUserToAddRows = false;
+            dgv_Heladera.AllowUserToDeleteRows = false;
+            dgv_Heladera.AllowUserToResizeColumns = false;
+            dgv_Heladera.AllowUserToResizeRows = false;
             dgv_Heladera.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Heladera.Columns.AddRange(new DataGridViewColumn[] { TipoProducto, NombreProducto, PrecioPorKg, CantidadKgDisponibles, CantidadSolicitada });
-            dgv_Heladera.Location = new Point(32, 413);
+            dgv_Heladera.Columns.AddRange(new DataGridViewColumn[] { TipoProducto, NombreProducto, PrecioPorKg, CantidadSolicitada });
+            dgv_Heladera.Location = new Point(50, 408);
             dgv_Heladera.Name = "dgv_Heladera";
-            dgv_Heladera.RowHeadersWidth = 62;
+            dgv_Heladera.ReadOnly = true;
+            dgv_Heladera.RowHeadersWidth = 4;
             dgv_Heladera.RowTemplate.Height = 33;
-            dgv_Heladera.Size = new Size(809, 225);
+            dgv_Heladera.Size = new Size(756, 225);
             dgv_Heladera.TabIndex = 16;
             dgv_Heladera.CellEndEdit += dgv_Heladera_CellEndEdit;
+            dgv_Heladera.CellValidating += dgv_Heladera_CellValidating;
+            dgv_Heladera.ColumnAdded += dgv_Heladera_ColumnAdded;
             // 
             // TipoProducto
             // 
             TipoProducto.HeaderText = "Tipo";
             TipoProducto.MinimumWidth = 8;
             TipoProducto.Name = "TipoProducto";
+            TipoProducto.ReadOnly = true;
             TipoProducto.Width = 150;
             // 
             // NombreProducto
@@ -208,27 +219,23 @@
             NombreProducto.HeaderText = "Nombre";
             NombreProducto.MinimumWidth = 8;
             NombreProducto.Name = "NombreProducto";
-            NombreProducto.Width = 150;
+            NombreProducto.ReadOnly = true;
+            NombreProducto.Width = 300;
             // 
             // PrecioPorKg
             // 
             PrecioPorKg.HeaderText = "Precio Kg";
             PrecioPorKg.MinimumWidth = 8;
             PrecioPorKg.Name = "PrecioPorKg";
+            PrecioPorKg.ReadOnly = true;
             PrecioPorKg.Width = 150;
-            // 
-            // CantidadKgDisponibles
-            // 
-            CantidadKgDisponibles.HeaderText = "Stock Kg";
-            CantidadKgDisponibles.MinimumWidth = 8;
-            CantidadKgDisponibles.Name = "CantidadKgDisponibles";
-            CantidadKgDisponibles.Width = 150;
             // 
             // CantidadSolicitada
             // 
             CantidadSolicitada.HeaderText = "Cantidad";
             CantidadSolicitada.MinimumWidth = 8;
             CantidadSolicitada.Name = "CantidadSolicitada";
+            CantidadSolicitada.ReadOnly = true;
             CantidadSolicitada.Width = 150;
             // 
             // lbl_SaldoDisponible
@@ -263,6 +270,8 @@
             btn_Comprar.Text = "      Comprar";
             btn_Comprar.UseVisualStyleBackColor = true;
             btn_Comprar.Click += btn_Comprar_Click;
+            btn_Comprar.MouseEnter += btn_Comprar_MouseEnter;
+            btn_Comprar.MouseLeave += btn_Comprar_MouseLeave;
             // 
             // label1
             // 
@@ -359,11 +368,6 @@
         private Button btn_RegistroDeDatos;
         private ComboBox cbb_MedioDePago;
         private DataGridView dgv_Heladera;
-        private DataGridViewTextBoxColumn TipoProducto;
-        private DataGridViewTextBoxColumn NombreProducto;
-        private DataGridViewTextBoxColumn PrecioPorKg;
-        private DataGridViewTextBoxColumn CantidadKgDisponibles;
-        private DataGridViewTextBoxColumn CantidadSolicitada;
         private Label lbl_SaldoDisponible;
         private Label lbl_TotalApagar;
         private Button btn_Comprar;
@@ -371,5 +375,9 @@
         private Label label2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private DataGridViewTextBoxColumn TipoProducto;
+        private DataGridViewTextBoxColumn NombreProducto;
+        private DataGridViewTextBoxColumn PrecioPorKg;
+        private DataGridViewTextBoxColumn CantidadSolicitada;
     }
 }

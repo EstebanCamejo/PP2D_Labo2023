@@ -237,11 +237,17 @@
             // 
             // dgv_ListaDeProductos
             // 
+            dgv_ListaDeProductos.AllowDrop = true;
+            dgv_ListaDeProductos.AllowUserToAddRows = false;
+            dgv_ListaDeProductos.AllowUserToDeleteRows = false;
+            dgv_ListaDeProductos.AllowUserToResizeColumns = false;
+            dgv_ListaDeProductos.AllowUserToResizeRows = false;
             dgv_ListaDeProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ListaDeProductos.Location = new Point(39, 265);
             dgv_ListaDeProductos.Margin = new Padding(4, 3, 4, 3);
             dgv_ListaDeProductos.Name = "dgv_ListaDeProductos";
-            dgv_ListaDeProductos.RowHeadersWidth = 62;
+            dgv_ListaDeProductos.ReadOnly = true;
+            dgv_ListaDeProductos.RowHeadersWidth = 4;
             dgv_ListaDeProductos.RowTemplate.Height = 33;
             dgv_ListaDeProductos.Size = new Size(642, 245);
             dgv_ListaDeProductos.TabIndex = 16;
@@ -299,6 +305,8 @@
             btn_Atras.Text = "Atras";
             btn_Atras.UseVisualStyleBackColor = true;
             btn_Atras.Click += btn_Atras_Click;
+            btn_Atras.MouseEnter += btn_Atras_MouseEnter;
+            btn_Atras.MouseLeave += btn_Atras_MouseLeave;
             // 
             // pictureBox1
             // 

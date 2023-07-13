@@ -89,5 +89,25 @@ namespace VisualParcial1
         {
             txb_contrasenia.Text = "Contrasenia";
         }
+
+        private void btn_Cliente_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Cliente.BackColor = Color.Red;
+        }
+
+        private void btn_Cliente_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Cliente.BackColor = Color.White;
+        }
+
+        private void btn_Vendedor_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Vendedor.BackColor = Color.Red;
+        }
+
+        private void btn_Vendedor_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Vendedor.BackColor = Color.White;
+        }
     }
 }

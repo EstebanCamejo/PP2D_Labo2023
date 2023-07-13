@@ -48,11 +48,9 @@ namespace VisualParcial1
         {
             ClienteSeleccionado = CoreDelSistema.Clientes;
             cbb_SeleccionarCliente.Items.AddRange(ClienteSeleccionado.ToArray());
-
             dtgv_Productos.ReadOnly = true;
             heladera = vendedor.Heladera;
             ActualizarListBoxDeProductos();
-
         }
 
         /// <summary>
@@ -82,7 +80,7 @@ namespace VisualParcial1
             if (cliente == null)
             {
                 SonidoError();
-                MessageBox.Show("Antes de continuar es obligatorio \n seleccionar un cliente");                
+                MessageBox.Show("Antes de continuar es obligatorio \n seleccionar un cliente");
                 return;
             }
 
@@ -98,52 +96,60 @@ namespace VisualParcial1
             if (float.TryParse(txb_CantKg.Text, out cantidadSolicitada) && cantidadSolicitada > 0)
             {
                 precioPorCantidad = ObtenerPrecioPorCantidad(cantidadSolicitada, productoAgregado.PrecioPorKilo);
-               
-                ActualizarTotalAPagarEnELForm(precioPorCantidad + DevolverIvaDelProducto(precioPorCantidad));
 
-                //Comprobamos disponibilidad sobre la cantidad del producto
-
-                productoAgregado.SetearCantidadSolicitada(cantidadSolicitada);
-
-                if (heladera.DisponibilidadProducto(productoAgregado))
+                if (cliente.Billetera >= (precioPorCantidad + DevolverIvaDelProducto(precioPorCantidad) + totalAPagar))
                 {
-                    //****CHEQUEAR SI ES CON TC o EFVO***
+                    ActualizarTotalAPagarEnELForm(precioPorCantidad + DevolverIvaDelProducto(precioPorCantidad));
+                    //Comprobamos disponibilidad sobre la cantidad del producto
+                    productoAgregado.SetearCantidadSolicitada(cantidadSolicitada);
 
-                    if (cliente.TipoDePago == ETipoDePago.tarjeta)
+                    if (heladera.DisponibilidadProducto(productoAgregado))
                     {
-                        pagaConTarjeta = true;
+                        //****CHEQUEAR SI ES CON TC o EFVO***
+
+                        if (cliente.TipoDePago == ETipoDePago.tarjeta)
+                        {
+                            pagaConTarjeta = true;
+                        }
+
+                        // Actualizar Heladera
+                        heladera = heladera.ActualizarProductoEnLalista(productoAgregado, heladera.ListaProducto);
+
+                        // Actualizamos el DataGrid
+                        indiceProductoDgv = dtgv_Productos.Rows.Add();
+                        dtgv_Productos.Rows[indiceProductoDgv].Cells[0].Value = productoAgregado.Nombre;
+                        dtgv_Productos.Rows[indiceProductoDgv].Cells[1].Value = productoAgregado.CantidadDeKilos.ToString();
+                        dtgv_Productos.Rows[indiceProductoDgv].Cells[2].Value = productoAgregado.PrecioPorKilo.ToString();
+                        dtgv_Productos.Rows[indiceProductoDgv].Cells[3].Value = txb_CantKg.Text;
+                        dtgv_Productos.Rows[indiceProductoDgv].Cells[4].Value = precioPorCantidad.ToString();
+
+                        // Agregamos Producto a la lista de compras                        
+
+                        productoAgregado.SetearPrecioPorCantidadSolicitada(precioPorCantidad);
+
+                        AgregarProductosAlChanguito(productoAgregado);
+                        puedePagar = true;
+                        SonidoAgregarAlChangitoOK();
                     }
-
-                    // Actualizar Heladera
-                    heladera.ActualizarCantidad(productoAgregado);
-
-                    // Actualizamos el DataGrid
-                    indiceProductoDgv = dtgv_Productos.Rows.Add();
-                    dtgv_Productos.Rows[indiceProductoDgv].Cells[0].Value = productoAgregado.Nombre;
-                    dtgv_Productos.Rows[indiceProductoDgv].Cells[1].Value = productoAgregado.CantidadDeKilos.ToString();
-                    dtgv_Productos.Rows[indiceProductoDgv].Cells[2].Value = productoAgregado.PrecioPorKilo.ToString();
-                    dtgv_Productos.Rows[indiceProductoDgv].Cells[3].Value = txb_CantKg.Text;
-                    dtgv_Productos.Rows[indiceProductoDgv].Cells[4].Value = precioPorCantidad.ToString();
-
-                    // Agregamos Producto a la lista de compras                        
-                    
-                    productoAgregado.SetearPrecioPorCantidadSolicitada(precioPorCantidad);
-
-                    AgregarProductosAlChanguito(productoAgregado);
-                    puedePagar = true;
-                    SonidoAgregarAlChangitoOK();
+                    else
+                    {
+                        SonidoError();
+                        MessageBox.Show("La demanda solicitada de este producto no esta disponible.");
+                    }
+                    txb_CantKg.Text = "";
                 }
                 else
                 {
+                    MessageBox.Show("El saldo del cliente es insuficiente para realizar la venta");
                     SonidoError();
-                    MessageBox.Show("La demanda solicitada de este producto no esta disponible.");                    
+                    txb_CantKg.Text = "";
                 }
-                txb_CantKg.Text = "";
             }
             else
             {
                 SonidoError();
-                MessageBox.Show("La Cantidad Ingresada es Invalida");                
+                MessageBox.Show("La Cantidad Ingresada es Invalida");
+                txb_CantKg.Text = "";
             }
 
         }
@@ -171,9 +177,11 @@ namespace VisualParcial1
 
         private void ActualizarTotalAPagarEnELForm(float precioPorCantidad)
         {
-            totalAPagar += precioPorCantidad;
-
-            lbl_TotalApagar.Text = "Total a Pagar:    $" + totalAPagar.ToString();
+            if (cliente.Billetera >= totalAPagar)
+            {
+                totalAPagar += precioPorCantidad;
+                lbl_TotalApagar.Text = "Total a Pagar:    $" + totalAPagar.ToString();
+            }
         }
 
         private void AgregarProductosAlChanguito(Producto productoAgregado)
@@ -188,10 +196,17 @@ namespace VisualParcial1
             if (clienteVenta != null && puedePagar)
             {
                 vendedor.VenderProductos(clienteVenta, listaProductosComprados);
-                FrmGeneradorDeFactura generarFactura = new FrmGeneradorDeFactura(clienteVenta, listaProductosComprados, this);
+                FrmGeneradorDeFactura generarFactura = new FrmGeneradorDeFactura(clienteVenta, listaProductosComprados, menuVendedor, this);
+
+                //Actualizar Heladera del Core del sistema
+                CoreDelSistema.ActualizarListaDeProductos(heladera.ListaProducto);
                 generarFactura.Show();
                 SonidoDatosYCompraOK();
                 this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Para realizar una compra es necesario: \n- Cargar los datos de facturacion.\n- Cargar productos al changuito.\n\n Muchas Gracias! ");
             }
 
             //Hardcodeo un vendedor y llamo al metodo VenderProductos
@@ -211,13 +226,12 @@ namespace VisualParcial1
             Producto productoSeleccionado = (Producto)cbb_SleccionProducto.SelectedItem;
             lbl_TotalProducto.Text = "Precio Por Kg: $        " + productoSeleccionado.PrecioPorKilo.ToString();
             lbl_IvaProductoAgregado.Text = "IVA ProdSelec: $        " + (DevolverIvaDelProducto(productoSeleccionado.PrecioPorKilo)).ToString();
-
         }
 
         private void btn_VolverAtras_Click_1(object sender, EventArgs e)
         {
             menuVendedor.Show();
-            this.Hide();
+            this.Close();
             SonidoVolverAtras();
         }
 
@@ -240,6 +254,7 @@ namespace VisualParcial1
             lbl_NombreCliente.Text = "Nombre: " + cliente.Nombre + " " + cliente.Apellido;
             lbl_Cuit.Text = "CUIT: " + cliente.Cuit.ToString();
             lbl_TipoDePago.Text = "Tipo de Pago => " + cliente.TipoDePago.ToString();
+            lbl_TopeMaximo.Text = "Tope Maximo: $" + cliente.Billetera.ToString();
         }
 
         private void SonidoError()
@@ -267,6 +282,36 @@ namespace VisualParcial1
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = @"C:\Users\Usuario\source\repos\Camejo.Esteban\VisualParcial1\bin\SoundEffectSuperMarioBrosDown.wav"; ; // Ruta del archivo de sonido
             player.Play();
+        }
+
+        private void btn_Agregar_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Agregar.BackColor = Color.Red;
+        }
+
+        private void btn_Agregar_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Agregar.BackColor = Color.White;
+        }
+
+        private void btn_VolverAtras_MouseEnter(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.Red;
+        }
+
+        private void btn_VolverAtras_MouseLeave(object sender, EventArgs e)
+        {
+            btn_VolverAtras.BackColor = Color.White;
+        }
+
+        private void btn_Comprar_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Comprar.BackColor = Color.Red;
+        }
+
+        private void btn_Comprar_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Comprar.BackColor = Color.White;
         }
     }
 }

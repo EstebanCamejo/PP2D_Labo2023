@@ -55,6 +55,7 @@
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             label1 = new Label();
+            lbl_TopeMaximo = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgv_Productos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -64,6 +65,7 @@
             // 
             // cbb_SleccionProducto
             // 
+            cbb_SleccionProducto.DropDownStyle = ComboBoxStyle.DropDownList;
             cbb_SleccionProducto.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cbb_SleccionProducto.FormattingEnabled = true;
             cbb_SleccionProducto.Location = new Point(295, 206);
@@ -75,14 +77,21 @@
             // 
             // dtgv_Productos
             // 
+            dtgv_Productos.AllowDrop = true;
+            dtgv_Productos.AllowUserToAddRows = false;
+            dtgv_Productos.AllowUserToDeleteRows = false;
+            dtgv_Productos.AllowUserToOrderColumns = true;
+            dtgv_Productos.AllowUserToResizeColumns = false;
+            dtgv_Productos.AllowUserToResizeRows = false;
             dtgv_Productos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgv_Productos.Columns.AddRange(new DataGridViewColumn[] { Nombre, cantidadDeKilos, PrecioPorKg, Cantidad, Importe });
             dtgv_Productos.Location = new Point(59, 363);
             dtgv_Productos.Margin = new Padding(4, 3, 4, 3);
             dtgv_Productos.Name = "dtgv_Productos";
-            dtgv_Productos.RowHeadersWidth = 62;
+            dtgv_Productos.ReadOnly = true;
+            dtgv_Productos.RowHeadersWidth = 5;
             dtgv_Productos.RowTemplate.Height = 33;
-            dtgv_Productos.Size = new Size(933, 280);
+            dtgv_Productos.Size = new Size(910, 280);
             dtgv_Productos.TabIndex = 1;
             // 
             // Nombre
@@ -90,6 +99,7 @@
             Nombre.HeaderText = "Nombre de Producto";
             Nombre.MinimumWidth = 8;
             Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
             Nombre.Width = 300;
             // 
             // cantidadDeKilos
@@ -97,6 +107,7 @@
             cantidadDeKilos.HeaderText = "Stock";
             cantidadDeKilos.MinimumWidth = 8;
             cantidadDeKilos.Name = "cantidadDeKilos";
+            cantidadDeKilos.ReadOnly = true;
             cantidadDeKilos.Width = 150;
             // 
             // PrecioPorKg
@@ -104,6 +115,7 @@
             PrecioPorKg.HeaderText = "P. Kg.";
             PrecioPorKg.MinimumWidth = 8;
             PrecioPorKg.Name = "PrecioPorKg";
+            PrecioPorKg.ReadOnly = true;
             PrecioPorKg.Width = 150;
             // 
             // Cantidad
@@ -111,6 +123,7 @@
             Cantidad.HeaderText = "Cantidad";
             Cantidad.MinimumWidth = 8;
             Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
             Cantidad.Width = 150;
             // 
             // Importe
@@ -118,6 +131,7 @@
             Importe.HeaderText = "Importe";
             Importe.MinimumWidth = 8;
             Importe.Name = "Importe";
+            Importe.ReadOnly = true;
             Importe.Width = 150;
             // 
             // lbl_ProductoSeleccionado
@@ -158,7 +172,7 @@
             lbl_TotalProducto.AutoSize = true;
             lbl_TotalProducto.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_TotalProducto.ForeColor = SystemColors.MenuBar;
-            lbl_TotalProducto.Location = new Point(595, 217);
+            lbl_TotalProducto.Location = new Point(595, 206);
             lbl_TotalProducto.Margin = new Padding(4, 0, 4, 0);
             lbl_TotalProducto.Name = "lbl_TotalProducto";
             lbl_TotalProducto.Size = new Size(153, 18);
@@ -177,6 +191,8 @@
             btn_Agregar.Text = "       Agregar";
             btn_Agregar.UseVisualStyleBackColor = false;
             btn_Agregar.Click += btn_Agregar_Click;
+            btn_Agregar.MouseEnter += btn_Agregar_MouseEnter;
+            btn_Agregar.MouseLeave += btn_Agregar_MouseLeave;
             // 
             // btn_Comprar
             // 
@@ -187,16 +203,18 @@
             btn_Comprar.Name = "btn_Comprar";
             btn_Comprar.Size = new Size(261, 55);
             btn_Comprar.TabIndex = 9;
-            btn_Comprar.Text = "     Comprar";
+            btn_Comprar.Text = "     Facturar";
             btn_Comprar.UseVisualStyleBackColor = false;
             btn_Comprar.Click += btn_Comprar_Click;
+            btn_Comprar.MouseEnter += btn_Comprar_MouseEnter;
+            btn_Comprar.MouseLeave += btn_Comprar_MouseLeave;
             // 
             // lbl_TotalApagar
             // 
             lbl_TotalApagar.AutoSize = true;
             lbl_TotalApagar.Font = new Font("Lucida Sans", 10F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_TotalApagar.ForeColor = Color.Red;
-            lbl_TotalApagar.Location = new Point(595, 325);
+            lbl_TotalApagar.Location = new Point(595, 311);
             lbl_TotalApagar.Margin = new Padding(4, 0, 4, 0);
             lbl_TotalApagar.Name = "lbl_TotalApagar";
             lbl_TotalApagar.Size = new Size(159, 23);
@@ -220,7 +238,7 @@
             lbl_Cuit.AutoSize = true;
             lbl_Cuit.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_Cuit.ForeColor = SystemColors.MenuBar;
-            lbl_Cuit.Location = new Point(598, 84);
+            lbl_Cuit.Location = new Point(595, 77);
             lbl_Cuit.Margin = new Padding(4, 0, 4, 0);
             lbl_Cuit.Name = "lbl_Cuit";
             lbl_Cuit.Size = new Size(78, 18);
@@ -232,7 +250,7 @@
             lbl_TipoDePago.AutoSize = true;
             lbl_TipoDePago.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_TipoDePago.ForeColor = SystemColors.MenuBar;
-            lbl_TipoDePago.Location = new Point(598, 123);
+            lbl_TipoDePago.Location = new Point(595, 111);
             lbl_TipoDePago.Margin = new Padding(4, 0, 4, 0);
             lbl_TipoDePago.Name = "lbl_TipoDePago";
             lbl_TipoDePago.Size = new Size(139, 18);
@@ -244,7 +262,7 @@
             lbl_IvaProductoAgregado.AutoSize = true;
             lbl_IvaProductoAgregado.Font = new Font("Lucida Sans", 8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_IvaProductoAgregado.ForeColor = SystemColors.MenuBar;
-            lbl_IvaProductoAgregado.Location = new Point(598, 264);
+            lbl_IvaProductoAgregado.Location = new Point(595, 256);
             lbl_IvaProductoAgregado.Margin = new Padding(4, 0, 4, 0);
             lbl_IvaProductoAgregado.Name = "lbl_IvaProductoAgregado";
             lbl_IvaProductoAgregado.Size = new Size(145, 18);
@@ -263,6 +281,8 @@
             btn_VolverAtras.Text = "Atras";
             btn_VolverAtras.UseVisualStyleBackColor = false;
             btn_VolverAtras.Click += btn_VolverAtras_Click_1;
+            btn_VolverAtras.MouseEnter += btn_VolverAtras_MouseEnter;
+            btn_VolverAtras.MouseLeave += btn_VolverAtras_MouseLeave;
             // 
             // lbl_SeleccionarCliente
             // 
@@ -277,8 +297,9 @@
             // 
             // cbb_SeleccionarCliente
             // 
+            cbb_SeleccionarCliente.DropDownStyle = ComboBoxStyle.DropDownList;
             cbb_SeleccionarCliente.FormattingEnabled = true;
-            cbb_SeleccionarCliente.Location = new Point(295, 33);
+            cbb_SeleccionarCliente.Location = new Point(295, 36);
             cbb_SeleccionarCliente.Name = "cbb_SeleccionarCliente";
             cbb_SeleccionarCliente.Size = new Size(218, 29);
             cbb_SeleccionarCliente.TabIndex = 20;
@@ -333,12 +354,24 @@
             label1.TabIndex = 25;
             label1.Text = "FM Carnes SRL";
             // 
+            // lbl_TopeMaximo
+            // 
+            lbl_TopeMaximo.AutoSize = true;
+            lbl_TopeMaximo.Font = new Font("Lucida Sans", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_TopeMaximo.ForeColor = Color.Lime;
+            lbl_TopeMaximo.Location = new Point(595, 146);
+            lbl_TopeMaximo.Name = "lbl_TopeMaximo";
+            lbl_TopeMaximo.Size = new Size(168, 23);
+            lbl_TopeMaximo.TabIndex = 26;
+            lbl_TopeMaximo.Text = "Tope Maximo:  ";
+            // 
             // FrmCompraVenta
             // 
             AutoScaleDimensions = new SizeF(12F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(1041, 747);
+            Controls.Add(lbl_TopeMaximo);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -404,5 +437,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Label label1;
+        private Label lbl_TopeMaximo;
     }
 }
