@@ -99,9 +99,29 @@ namespace PPLabo2_2D
                 }
             }
 
+            return retorno;                        
+        }
+        public bool ActualizarBilletera(float subtotalFactura, bool pagarConTarjeta, float ivaDelProductoAgregado, bool esDevolucion)
+        {
+            bool retorno = false;
+            if (esDevolucion)
+            {
+                if (pagarConTarjeta)
+                {
+                    subtotalFactura += ivaDelProductoAgregado;
+                    subtotalFactura += (subtotalFactura * 1 / 20);
+                    Billetera += subtotalFactura;
+                    retorno = true;
+                }
+                else
+                {
+                    subtotalFactura += ivaDelProductoAgregado;                    
+                    Billetera += subtotalFactura;
+                    retorno = true;                 
+                }
+       
+            }
             return retorno;
-            
-            
         }
         /// <summary>
         /// 

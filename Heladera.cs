@@ -28,22 +28,23 @@ namespace PPLabo2_2D
         /// </summary>
         /// <param name="producto"></param>
         /// <returns></returns>
-        public bool ActualizarProductoEnLalista(Producto producto)
+        public Heladera ActualizarProductoEnLalista(Producto producto, List<Producto>productosHeladera)
         {
+            Heladera listaProductoActualizada = new Heladera(productosHeladera);
+
             if (producto is not null)
             {              
-                for (int i = 0;i < this.listaProducto.Count;i++) 
+                for (int i = 0;i < listaProductoActualizada.ListaProducto.Count;i++) 
                 {
-                    if (listaProducto[i].CodigoDeProducto==producto.CodigoDeProducto)     
+                    if (listaProductoActualizada.ListaProducto[i].Nombre==producto.Nombre)     
                     {
-                        listaProducto[i] = producto;
+                        listaProductoActualizada.ListaProducto[i].CantidadDeKilos -= producto.CantidadSolicitada;
 
-                        return true;
-                        break;
+                        return listaProductoActualizada;                        
                     }
                 }                                
             }
-            return false;
+            return null;
         }
 
         /// <summary>

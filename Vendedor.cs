@@ -29,14 +29,13 @@ namespace PPLabo2_2D
       /// <returns></returns>
         public bool VenderProductos(Cliente cliente, List<Producto> productos)
         {                                  
-            foreach(Producto p in productos)
-            {
-                if (!this.heladera.DisponibilidadProducto(p))
-                {                   
-                    return false;
-                }
-
-            }
+            //foreach(Producto p in productos)
+            //{
+            //    if (!this.heladera.DisponibilidadProducto(p))
+            //    {                   
+            //        return false;
+            //    }
+            //}
             Factura factura = new Factura();
 
             factura.GenerarFactura(cliente, productos);

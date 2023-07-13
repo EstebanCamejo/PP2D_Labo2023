@@ -35,15 +35,15 @@ namespace PPLabo2_2D
         /// </summary>
         private static void CargarClaseClientes()
         {
-            CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",999999,301111111, ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Graham","Coxon",999999,301111112,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",999999,301111113,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Miles","Kane",999999,301111114,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Kevin","Shields",999999,301111115,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Stephen","Malkmus",999999,301111116,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Kurt","Vile",999999,301111117,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",999999,301111118,ETipoDePago.efectivo));
-            CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",999999,301111119,ETipoDePago.efectivo));                        
+            CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Diego","Hem",10000,301111111, ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Pablo","Mastracci",10000, 301111112,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",10000, 301111113,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Lucas","Romero",10000,301111114,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Rafaela","Sanchez",10000, 301111115,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Samanta","Bianucci",10000, 301111116,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Angeles","Antelo",10000, 301111117,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Javier","Iriarte",10000, 301111118,ETipoDePago.efectivo));
+            CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Martin","Losasso",10000, 301111119,ETipoDePago.efectivo));                        
         }
 
         /// <summary>
@@ -52,30 +52,30 @@ namespace PPLabo2_2D
 
         private static void CargarClaseProductos() 
         {
-            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2100,75, "Asado"));
-            CoreDelSistema.productos.Add(new(EProdcuto.vacuno, 2400,32, "Bola de Lomo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,1690,54, "Picada Premium"));
-            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2300,65, "Bife Ancho"));
+            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2100,50, "Asado"));
+            CoreDelSistema.productos.Add(new(EProdcuto.vacuno, 2400,50, "Bola de Lomo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,1690,50, "Picada Premium"));
+            CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2300,50, "Bife Ancho"));
 
-            CoreDelSistema.productos.Add(new(EProdcuto.aves, 790,65, "Pollo de Granja"));
-            CoreDelSistema.productos.Add(new(EProdcuto.aves, 2800,45, "Suprema"));
-            CoreDelSistema.productos.Add(new(EProdcuto.aves, 750,29, "Pata y Muslo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.aves, 2315,55, "Patitas de Pollo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.aves, 790,50, "Pollo de Granja"));
+            CoreDelSistema.productos.Add(new(EProdcuto.aves, 2800,50, "Suprema"));
+            CoreDelSistema.productos.Add(new(EProdcuto.aves, 750,50, "Pata y Muslo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.aves, 2315,50, "Patitas de Pollo"));
 
-            CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 1700,44, "Costilla de Cerdo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 2500,65, "Solomillo de Cerdo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.cerdo,1350,25, "Pechito de Cerdo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.cerdo,2500,34, "Bondiola de Cerdo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 1700,50, "Costilla de Cerdo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 2500,50, "Solomillo de Cerdo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.cerdo,1350,50, "Pechito de Cerdo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.cerdo,2500,50, "Bondiola de Cerdo"));
             
-            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 2200,36, "Milanesas de Carne"));
-            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,51, "Milanesas de Pechuga"));
-            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,25, "Milanesas de Cerdo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,65, "Hamburguesas de Carne"));
+            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 2200,50, "Milanesas de Carne"));
+            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Milanesas de Pechuga"));
+            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Milanesas de Cerdo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Hamburguesas de Carne"));
 
-            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1975,65, "Chorizo"));
-            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1295,33, "Morcilla"));
-            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 2675,54, "Salchicha Parrillera"));
-            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1075,82, "Chinchulin"));
+            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1975,50, "Chorizo"));
+            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1295,50, "Morcilla"));
+            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 2675,50, "Salchicha Parrillera"));
+            CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1075,50, "Chinchulin"));
         }
 
 
@@ -105,7 +105,7 @@ namespace PPLabo2_2D
         public static List<Producto> Productos
         {
             get { return CoreDelSistema.productos; }
-          //  set { CoreDelSistema.productos = value; }
+            set { CoreDelSistema.productos = value; }
         }
 
         /// <summary>
@@ -174,15 +174,16 @@ namespace PPLabo2_2D
             return false;
         }
 
-        public static bool ActualizarListaDeProductos(List <Producto> producto)
-        {
-            if (producto is not null)
+        public static bool ActualizarListaDeProductos(List<Producto> listaActualizadaDeProductos)
+        {            
+            if (listaActualizadaDeProductos is not null)
             {
-                CoreDelSistema.productos = producto;
+                CoreDelSistema.productos = listaActualizadaDeProductos;
                 return true;
             }
             return false;
         }
-
     }
+
+    
 }
