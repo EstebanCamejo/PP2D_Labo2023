@@ -5,17 +5,22 @@ namespace PruebasUnitarias2
     public class UnitTest1
     {
         [TestMethod]
-        public void DeserializarJson_ValidacionDeConversionDeArchivo()
+        public void SerializarJson_ValidacionDeConversionDeArchivo()
         {
-            // Arrange
-            Producto producto = new Producto();
+            // Arrange            
+            List <Producto> listaTesting = new List<Producto>();            
+            listaTesting.Add(new(EProdcuto.vacuno,2300,50, "Bife Ancho"));            
+            listaTesting.Add(new(EProdcuto.aves, 2315,50, "Patitas de Pollo"));
+            listaTesting.Add(new(EProdcuto.cerdo, 1700,50, "Costilla de Cerdo"));
+            listaTesting.Add(new(EProdcuto.preparados, 1990,50, "Hamburguesas de Carne"));
+            listaTesting.Add(new(EProdcuto.embutidos, 1975,50, "Chorizo"));
+
             string mensaje = "La deserializacion JSON no se realizo correctamente";
 
             // Act
-            string resultado = producto.DeSerializarJson();
-            
-            // Assert
+            bool resultado = CoreDelSistema.SerializarProductosJson(listaTesting);
 
+            // Assert
             Assert.AreNotEqual(mensaje,resultado);
         }
 
@@ -25,11 +30,11 @@ namespace PruebasUnitarias2
             Factura factura = new Factura();
 
             // Arrange
-            float subtotal = 100;
+            factura.SubtotalFactura = 100;
             float ivaEsperado = 21;
 
             // Act
-            float resultado = factura.CalcularIva(subtotal);
+            float resultado = factura.CalcularIva();
 
             // Assert
             Assert.AreEqual(ivaEsperado, resultado);
