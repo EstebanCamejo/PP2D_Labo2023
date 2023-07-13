@@ -1,0 +1,4 @@
+Fecha: 09/07/2023 18:56:38
+Número de Factura: 58
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 1089

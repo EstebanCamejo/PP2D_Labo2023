@@ -1,0 +1,4 @@
+Fecha: 09/07/2023 11:53:10
+Número de Factura: 52
+Nombre de la Factura: Fermin Rivora
+Total de la Factura: 3600

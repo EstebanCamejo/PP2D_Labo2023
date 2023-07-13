@@ -1,0 +1,4 @@
+Fecha: 06/07/2023 22:48:33
+Número de Factura: 51
+Nombre de la Factura: Juan Cruz
+Total de la Factura: 3630

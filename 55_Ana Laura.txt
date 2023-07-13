@@ -1,0 +1,4 @@
+Fecha: 09/07/2023 12:05:27
+Número de Factura: 55
+Nombre de la Factura: Ana Laura
+Total de la Factura: 7260

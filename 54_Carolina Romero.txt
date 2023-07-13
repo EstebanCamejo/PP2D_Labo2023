@@ -1,0 +1,4 @@
+Fecha: 09/07/2023 12:03:01
+Número de Factura: 54
+Nombre de la Factura: Carolina Romero
+Total de la Factura: 2722,5
