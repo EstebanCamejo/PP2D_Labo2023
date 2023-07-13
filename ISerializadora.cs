@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace PPLabo2_2D
 {
-    public interface ISerializadora <T>
-    {
-        public void SerializarJson (List<T> listaSerializar);
 
-        public void SerializarXml(List<T> listaSerializar);
+    //La interfaz se utiliza con un parámetro generico T que debe ser una clase con un constructor sin parametros.
+    //Las clases que implementen esta interfaz deberan proporcionar una implementacion de los metodos
+    //Serializar y Deserializar para adaptarse a sus necesidades especificas de serializacion y deserializacion.
+    public interface ISerializadora <T> where T : class, new()
+    {
+        public bool Serializar(T obj);
+        public T Deserializar();
     }
 }

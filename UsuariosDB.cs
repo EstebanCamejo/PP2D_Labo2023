@@ -52,58 +52,7 @@ namespace PPLabo2_2D
                 connection.Close();
             }
         }
-
-        //internal static List<Usuario> Leer()
-        //{
-        //    List<Usuario> usuarios = new List<Usuario>();
-
-        //    try
-        //    {
-        //        connection.Open();
-        //        command.CommandText = $"SELECT * FROM USUARIOS";
-
-        //        SqlDataReader dataReader = command.ExecuteReader();
-        //        while (dataReader.Read())
-        //        {
-        //            string nombreUsuario = dataReader["nombreUsuario"].ToString();
-        //            string contrasenia = dataReader["contrasenia"].ToString();
-        //            string nombre = dataReader["nombre"].ToString();
-        //            int tipoDeUsuario = Convert.ToInt32(dataReader["tipoDeUsuario"]);
-
-        //            Usuario usuario;
-
-        //            if (tipoDeUsuario == 0)
-        //            {
-        //                // Es un vendedor
-        //                usuario = new Vendedor(nombreUsuario, contrasenia, nombre);
-        //            }
-        //            else if (tipoDeUsuario == 1)
-        //            {
-        //                // Es un cliente
-        //                usuario = new Cliente(nombreUsuario, contrasenia, nombre);
-        //            }
-        //            else
-        //            {
-        //                // Tipo de usuario desconocido
-        //                throw new Exception("Tipo de usuario desconocido.");
-        //            }
-
-        //            usuarios.Add(usuario);
-        //        }
-
-        //        return usuarios;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
-
+      
 
         public static Usuario LoginTipoDeUsuario(string nombreUsuario, string contrasenia)
         {

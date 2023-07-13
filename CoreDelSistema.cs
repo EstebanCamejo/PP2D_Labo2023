@@ -13,8 +13,14 @@ namespace PPLabo2_2D
         static List<Cliente> clientes;
         public static List<Usuario> usuarios;
         static List<Producto> productos;
-        static List <Factura> facturas;       
-        
+        static List <Factura> facturas;
+
+        static SerializadorJson<List<Factura>> SerializadorJsonFactura = new SerializadorJson <List<Factura>> ("facturas.json");
+        static SerializadorJson<List<Producto>> SerializadorJsonProducto = new SerializadorJson <List<Producto>> ("productos.json");
+
+        static SerializadorXml<List<Factura>> SerializadorXmlFactura = new SerializadorXml<List<Factura>>("facturas.xml");
+        static SerializadorXml<List<Producto>> SerializadorXmlProducto = new SerializadorXml<List<Producto>>("productos.xml");
+
         static CoreDelSistema()
         {
             CoreDelSistema.clientes = new List<Cliente>();
@@ -22,37 +28,18 @@ namespace PPLabo2_2D
             CoreDelSistema.productos = new List<Producto>();
             CoreDelSistema.facturas = new List<Factura>();
 
-
             CoreDelSistema.CargarUsuarios();
             CoreDelSistema.CargarClaseProductos();
-            CoreDelSistema.CargarClaseFacturas();
-
-            //CoreDelSistema.CargarClaseClientes();
-            ValidacionDeListas(); 
+            CoreDelSistema.CargarClaseFacturas();           
         }
 
-        private static void ValidacionDeListas()
-        {
-            ExtensionCoreDelSistema extensionCoreDelSistema = new ExtensionCoreDelSistema();
-            extensionCoreDelSistema.ValidarListas(usuarios, productos, facturas);             
-        }
+    
 
         /// <summary>
         /// Harcodeo de los clientes al sistema
         /// </summary>
         private static void CargarClaseClientes()
-        {
-            //CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",10000,301111111, ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Graham","Coxon",10000, 301111112,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",10000, 301111113,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Miles","Kane",10000,301111114,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Kevin","Shields",10000, 301111115,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Stephen","Malkmus",10000, 301111116,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Kurt","Vile",10000, 301111117,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",10000, 301111118,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",10000, 301111119,ETipoDePago.efectivo));
-
-            //CoreDelSistema.clientes;
+        {                        
             foreach (Usuario usuario in CoreDelSistema.usuarios)
             {
                 if (usuario.TipoDeUsuario == 1)
@@ -63,55 +50,17 @@ namespace PPLabo2_2D
             }
         }
         private static void CargarUsuarios()
-        {
-            //CoreDelSistema.clientes.Add(new("Usuario1","Contrasenia1","Courtney","Taylor",10000,301111111, ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario2","Contrasenia2","Graham","Coxon",10000, 301111112,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario3","Contrasenia3","Brais","Fernandez",10000, 301111113,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario4","Contrasenia4","Miles","Kane",10000,301111114,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario5","Contrasenia5","Kevin","Shields",10000, 301111115,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario6","Contrasenia6","Stephen","Malkmus",10000, 301111116,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario7","Contrasenia7","Kurt","Vile",10000, 301111117,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario8","Contrasenia8","Tim","Presley",10000, 301111118,ETipoDePago.efectivo));
-            //CoreDelSistema.clientes.Add(new("Usuario9","Contrasenia9","Joey","Santiago",10000, 301111119,ETipoDePago.efectivo));
-
+        {            
             CoreDelSistema.usuarios = UsuariosDB.Leer();
             CargarClaseClientes();
         }
-
-
-
 
         /// <summary>
         /// Harcodeo de los productos al sistema
         /// </summary>
 
         private static void CargarClaseProductos() 
-        {
-            //CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2100,50, "Asado"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.vacuno, 2400,50, "Bola de Lomo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.vacuno,1690,50, "Picada Premium"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.vacuno,2300,50, "Bife Ancho"));
-
-            //CoreDelSistema.productos.Add(new(EProdcuto.aves, 790,50, "Pollo de Granja"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.aves, 2800,50, "Suprema"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.aves, 750,50, "Pata y Muslo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.aves, 2315,50, "Patitas de Pollo"));
-
-            //CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 1700,50, "Costilla de Cerdo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.cerdo, 2500,50, "Solomillo de Cerdo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.cerdo,1350,50, "Pechito de Cerdo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.cerdo,2500,50, "Bondiola de Cerdo"));
-            
-            //CoreDelSistema.productos.Add(new(EProdcuto.preparados, 2200,50, "Milanesas de Carne"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Milanesas de Pechuga"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Milanesas de Cerdo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.preparados, 1990,50, "Hamburguesas de Carne"));
-
-            //CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1975,50, "Chorizo"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1295,50, "Morcilla"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 2675,50, "Salchicha Parrillera"));
-            //CoreDelSistema.productos.Add(new(EProdcuto.embutidos, 1075,50, "Chinchulin"));
-
+        {            
             productos = ProductoBD.Leer();
         }
 
@@ -121,15 +70,8 @@ namespace PPLabo2_2D
         /// </summary>
 
         private static void CargarClaseFacturas()
-        {
-            //CoreDelSistema.facturas.Add(new(CoreDelSistema.productos, clientes[1],1000,1000,210,1210,0,1));
-            //CoreDelSistema.facturas.Add(new(CoreDelSistema.productos, clientes[2],2000,2000,420,2420,0,2));
-            //CoreDelSistema.facturas.Add(new(CoreDelSistema.productos, clientes[3],3000,3000,630,3630,0,3));
-            //CoreDelSistema.facturas.Add(new(CoreDelSistema.productos, clientes[4],4000,4000,840,4840,0,4));
-            //CoreDelSistema.facturas.Add(new(CoreDelSistema.productos, clientes[5],5000,5000,1050,6050,0,5));
-            
+        {                        
             CoreDelSistema.facturas = FacturasBD.Leer();
-
         }
 
 
@@ -259,6 +201,129 @@ namespace PPLabo2_2D
                 return false;
             }
         }
+
+        public static bool SerializarFacturasJson (List<Factura> listaFacturas)
+        {
+            try
+            {
+                if (!SerializadorJsonFactura.Serializar(listaFacturas))
+                {                    
+                    throw new SerializarException();                    
+                }                 
+            }
+            catch (SerializarException)
+            {
+                return false; 
+            }
+            return true;                
+        }
+        public static List<Factura> DeserializarFacturasJson()
+        {
+            List<Factura> listFacturas = new List<Factura>();
+            try
+            {
+                return listFacturas = SerializadorJsonFactura.Deserializar();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public static bool SerializarFacturasXml(List<Factura> listaFacturas)
+        {
+            try
+            {
+                if (!SerializadorXmlFactura.Serializar(listaFacturas))
+                {
+                    throw new SerializarException();
+                }
+            }
+            catch (SerializarException)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static List<Factura> DeserializarFacturasXml()
+        {
+            List<Factura> listFacturas = new List<Factura>();
+            try
+            {
+                return listFacturas = SerializadorXmlFactura.Deserializar();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        
+        
+        
+        public static bool SerializarProductosJson (List<Producto> listaProductos)
+        {
+            bool retorno = true;
+            try
+            {
+                if (!SerializadorJsonProducto.Serializar(listaProductos))
+                {
+                    retorno = false;
+                    throw new SerializarException();
+                }
+            }
+            catch (SerializarException ex)
+            {               
+                throw ex;
+            }
+            return retorno;
+        }
+
+        public static List<Producto> DeserializarProductosJson()
+        {
+            List<Producto> listProductos = new List<Producto>();
+            try
+            {
+                return listProductos = SerializadorJsonProducto.Deserializar();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static bool SerializarProductosXml(List<Producto> listaProductos)
+        {
+            bool retorno = true;
+            try
+            {
+                if (!SerializadorXmlProducto.Serializar(listaProductos))
+                {
+                    retorno = false;
+                    throw new SerializarException();
+                }
+            }
+            catch (SerializarException ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        public static List<Producto> DeserializarProductosXml()
+        {
+            List<Producto> listProductos = new List<Producto>();
+            try
+            {
+                return listProductos = SerializadorXmlProducto.Deserializar();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
     }
 
 }

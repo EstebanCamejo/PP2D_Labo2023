@@ -14,7 +14,7 @@ using System.IO;
 
 namespace PPLabo2_2D
 {
-    public class Factura : ISerializadora<Factura>, IDeserializadora
+    public class Factura 
     {
         private List<Producto> listaDeProductosEnFactura;
         private Cliente cliente;
@@ -125,41 +125,6 @@ namespace PPLabo2_2D
         }
 
 
-        /// <summary>
-        /// Recibe el atributo del subtotal de la compra y calcula el iva sobre este monto
-        /// </summary>
-        /// <param name="SubtotalFactura"></param>
-        /// <returns></returns>
-        public float CalcularIva(float SubtotalFactura)
-        {
-            try
-            {
-                float iva = 21f / 100f;
-                return SubtotalFactura * iva;
-            }
-            catch (Exception) 
-            {
-                throw;
-            }                      
-        }
-
-        /// <summary>
-        /// Recibe el total de la factura con el iva sumado y suma la recarga por poago con tarjeta
-        /// </summary>
-        /// <param name="TotalFactura"></param>
-        /// <returns></returns>
-        public static float RecargoTarjetaDeCredito(float TotalFactura)
-        {
-            try
-            {
-                float recargo = 1f / 20f;
-                return TotalFactura * recargo;
-            }
-            catch (Exception) 
-            {
-                throw;
-            }            
-        }
 
         /// <summary>
         /// Recibe el cliente que realizo la compra y el listado de productos y genera la factura de la compra
@@ -168,7 +133,7 @@ namespace PPLabo2_2D
         /// <param name="producto"></param>
         /// <returns></returns>
         public Factura GenerarFactura(Cliente clienteFacturar, List<Producto> producto)
-        {
+        {          
             try
             {
                 listaDeProductosEnFactura = new List<Producto>();
@@ -181,18 +146,18 @@ namespace PPLabo2_2D
                         this.SubtotalFactura += p.CantidadSolicitada * p.PrecioPorKilo;
                     }
                 }
-                this.IvaFactura = CalcularIva(SubtotalFactura);
+
+                this.IvaFactura = this.CalcularIva();
                 this.TotalFactura = SubtotalFactura + IvaFactura;
 
                 if (cliente.TipoDePago == ETipoDePago.tarjeta)
                 {
-                    this.Recargo = RecargoTarjetaDeCredito(totalFactura);
+                    this.Recargo = this.RecargoTarjetaDeCredito();                    
                     this.totalFactura += Recargo;
                 }
             
                 this.Nombre = cliente.Nombre;
-                cliente.GuardarFactura(this);
-                //CoreDelSistema.GuardarNuevaFactura(this);
+                cliente.GuardarFactura(this);               
                 return this;
             }
             catch (Exception)
@@ -201,140 +166,7 @@ namespace PPLabo2_2D
             }
         }
 
-        /// <summary>
-        /// Devuelve una cadena de strings con los datos necesarios para imprimar la factura en un listado
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {                  
-            return $"{Cliente.Nombre} {Cliente.Apellido}";
-        }
-
-        public void SerializarJson(List<Factura> listaSerializar)
-        {
-            try
-            {
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.IgnoreCycles,
-                    WriteIndented = true // Opcional: Para que el JSON sea mas legible
-                };
-
-                using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\facturasJson.json"))
-                {
-                    string jsonString = JsonSerializer.Serialize(listaSerializar, options);
-                    sw.WriteLine(jsonString);
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Se produjo una excepcion al serializar el JSON: ");
-                throw;                
-            }          
-        }
-        public string DeSerializarJson()
-        {            
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\facturasJson.json";
-
-            try
-            {
-                using (StreamReader streamReader = new StreamReader(filePath))
-                {
-                    string jsonString = streamReader.ReadToEnd();
-
-                    if (!string.IsNullOrEmpty(jsonString))
-                    {
-                        List<Factura> listaDeSerializar = JsonSerializer.Deserialize<List<Factura>>(jsonString);
-
-                        if (listaDeSerializar != null)
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            sb.AppendLine("----------DESERIALIZAR_Json---------\n\n\n");
-
-                            foreach (Factura item in listaDeSerializar)
-                            {
-                                sb.AppendLine("-----------------------------------");
-                                sb.AppendLine($"NUMERO: {item.NumeroDeFactura}");
-                                sb.AppendLine($"CLIENTE: {item.Nombre}");
-                                sb.AppendLine($"TOTAL: $ {item.TotalFactura}");
-                                sb.AppendLine("\n");
-                            }
-
-                            return sb.ToString();
-                        }
-                        else
-                        {
-                            return "La deserialización del JSON no pudo convertirse en una lista válida de facturas.";
-                        }
-                    }
-                    else
-                    {
-                        return "El archivo JSON está vacío.";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"Error al deserializar el JSON: {ex.Message}";
-            }
-        }
-
-
-        public void SerializarXml(List<Factura> listaSerializar)
-        {
-            try
-            {
-                string archivoXml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "facturas.xml");
-
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Factura>));
-
-                using (StreamWriter sw = new StreamWriter(archivoXml))
-                {
-                    serializer.Serialize(sw, listaSerializar);
-                }
-            }
-            catch (IOException)
-            { 
-                throw; 
-            }
-            catch (Exception) 
-            { 
-                throw; 
-            }
-        }
-        
-        public string DeSerializarXml()
-        {            
-            try
-            {
-                string archivoXml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "facturas.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Factura>));
-
-                using (StreamReader sr = new StreamReader(archivoXml))
-                {
-                    List<Factura> listaDeserializar = serializer.Deserialize(sr) as List<Factura>;
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($"        ----------DESERIALIZAR_XML----------\n\n\n");
-
-                    foreach (Factura item in listaDeserializar)
-                    {
-                        sb.AppendLine($"        -----------------------------------");
-                        sb.AppendLine($"        NUMERO: {item.NumeroDeFactura}");
-                        sb.AppendLine($"        CLIENTE: {item.Nombre}");
-                        sb.AppendLine($"        TOTAL: $ {item.TotalFactura}");
-
-                        sb.AppendLine($"\n");
-                    }
-
-                    return sb.ToString();
-                }
-            }
-            catch (Exception ex)             
-            {
-                return $"Error al deserializar el XML: {ex.Message}"; 
-            }           
-        }
+      
     }
 
 }

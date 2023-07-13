@@ -6,7 +6,7 @@
     using System.Text.Json.Serialization;
     using System.Xml.Serialization;
 
-    public class Producto : ISerializadora <Producto>, IDeserializadora 
+    public class Producto 
     {
         private EProdcuto tipoDeProducto;
         private float precioPorKilo; //heladera
@@ -73,35 +73,62 @@
         /// </summary>
         /// <param name="cantidadSolicitada"></param>
         /// <returns></returns>
-        public bool SetearCantidadSolicitada(float cantidadSolicitada)
+        //public bool SetearCantidadSolicitada(float cantidadSolicitada)
+        //{
+        //    try 
+        //    {
+        //        this.cantidadSolicitada = cantidadSolicitada;
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }           
+        //}
+
+        public void SetearCantidadSolicitada(float cantidadSolicitada)
         {
-            try 
+            try
             {
                 this.cantidadSolicitada = cantidadSolicitada;
-                return true;
             }
             catch (Exception)
             {
                 throw;
-            }           
+            }
         }
 
-        /// <summary>
-        /// El metodo setea el precio por la cantidad solicitada para este producto
-        /// </summary>
-        /// <param name="precioPorCantidad"></param>
-        /// <returns></returns>
-        public bool SetearPrecioPorCantidadSolicitada(float precioPorCantidad)
+
+
+
+        ///// <summary>
+        ///// El metodo setea el precio por la cantidad solicitada para este producto
+        ///// </summary>
+        ///// <param name="precioPorCantidad"></param>
+        ///// <returns></returns>
+        //public bool SetearPrecioPorCantidadSolicitada(float precioPorCantidad)
+        //{
+        //    try
+        //    {
+        //        this.precioPorCantidad = precioPorCantidad;
+        //        return true;
+        //    }
+        //    catch (Exception) 
+        //    { 
+        //        throw; 
+        //    }               
+        //}
+
+        public void SetearPrecioPorCantidadSolicitada(float precioPorCantidad)
         {
             try
             {
                 this.precioPorCantidad = precioPorCantidad;
-                return true;
             }
-            catch (Exception) 
-            { 
-                throw; 
-            }               
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private static int UltimoCodigoManual()
@@ -150,118 +177,5 @@
 
         }
 
-        public void SerializarJson(List<Producto> listaSerializar)
-        {
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\productosJson.json"))
-                {
-                    string jsonString = JsonSerializer.Serialize(listaSerializar);
-                    sw.WriteLine(jsonString);
-                }
-            }
-            catch (IOException)
-            { 
-                throw; 
-            }
-            catch (Exception) 
-            { 
-                throw; 
-            }
-        }
-        public string DeSerializarJson()
-        {
-            try
-            {
-                using (StreamReader streamReader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\productosJson.json"))
-                {
-                    string jsonString = streamReader.ReadToEnd();
-
-                    List<Producto> listaDeSerializar = JsonSerializer.Deserialize<List<Producto>>(jsonString) as List<Producto>;
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($"        ----------DESERIALIZAR_Json---------\n\n\n");
-
-                    foreach (Producto item in listaDeSerializar)
-                    {
-                        sb.AppendLine($"        -----------------------------------");
-                        sb.AppendLine($"        -----------{item.Nombre}-----------");
-                        sb.AppendLine($"        TIPO: {item.TipoDeProducto.ToString()}");
-                        sb.AppendLine($"        PRECIO x KG: $ {item.PrecioPorKilo}");
-                        sb.AppendLine($"        STOCK: {item.CantidadDeKilos} Kg");
-                        sb.AppendLine($"        CODIGO:---- {item.CodigoDeProducto}");
-                        sb.AppendLine($"\n");
-                    }
-
-                    return sb.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"Error al deserializar el JSON: {ex.Message}";
-            }            
-        }
-        
-       
-        public void SerializarXml(List<Producto> listaSerializar)
-        {
-            try
-            {
-                string archivoXml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "productos.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Producto>));
-
-                using (StreamWriter sw = new StreamWriter(archivoXml))
-                {
-                    serializer.Serialize(sw, listaSerializar);
-                }
-            }
-            catch (IOException) 
-            { 
-                throw; 
-            }
-            catch (Exception)
-            { 
-                throw; 
-            }            
-        }
-        
-        public string DeSerializarXml()
-        {
-            try
-            {
-                string archivoXml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "productos.xml");
-
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Producto>));
-
-                using (StreamReader sr = new StreamReader(archivoXml))
-                {
-                    List<Producto> listaDeserializar = serializer.Deserialize(sr) as List<Producto>;
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($"        ----------DESERIALIZAR_XML----------\n\n\n");
-
-                    foreach (Producto item in listaDeserializar)
-                    {
-                        sb.AppendLine($"        -----------------------------------");
-                        sb.AppendLine($"        -----------{item.Nombre}-----------");
-                        sb.AppendLine($"        TIPO: {item.TipoDeProducto.ToString()}");
-                        sb.AppendLine($"        PRECIO x KG: $ {item.PrecioPorKilo}");
-                        sb.AppendLine($"        STOCK: {item.CantidadDeKilos} Kg");
-                        sb.AppendLine($"        CODIGO:---- {item.CodigoDeProducto}");
-                        sb.AppendLine($"\n");
-                    }
-
-                    return sb.ToString();
-                }
-            }
-            catch (FileNotFoundException ex) 
-            {             
-                return $"Errorexcepciones de archivo no encontrado XML: {ex.Message}";
-            }
-            catch (Exception ex) 
-            {
-                return $"Error al deserializar el XML: {ex.Message}";                
-            }           
-        }
     }
 }
